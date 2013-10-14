@@ -30,7 +30,7 @@ class AddressManager extends AbstractAddressManager
     protected $objectManager;
     
     /**
-     * @var EntityRepository
+     * @var ObjectRepository
      */           
     protected $repository;    
 
