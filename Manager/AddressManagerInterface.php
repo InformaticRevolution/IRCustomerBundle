@@ -32,8 +32,6 @@ interface AddressManagerInterface
      * Updates an address.
      *
      * @param AddressInterface $address
-     * 
-     * @return void
      */
     public function updateAddress(AddressInterface $address);    
 
@@ -41,8 +39,6 @@ interface AddressManagerInterface
      * Deletes an address.
      *
      * @param AddressInterface $address
-     * 
-     * @return void
      */
     public function deleteAddress(AddressInterface $address);       
     
@@ -51,7 +47,7 @@ interface AddressManagerInterface
      *
      * @param array $criteria
      *
-     * @return AddressInterface
+     * @return AddressInterface|null
      */
     public function findAddressBy(array $criteria);      
     
