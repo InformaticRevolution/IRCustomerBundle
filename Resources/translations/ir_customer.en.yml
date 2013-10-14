@@ -1,0 +1,76 @@
+# Customer
+customer:
+    title: Title
+    first_name: First name
+    last_name: Last name
+    full_name: Full name
+    email: Email 
+    last_login: Last login time
+    enabled: Enabled
+    created_at: Registration time
+  
+    list:
+        title: Customers
+        no_results: There isn't any customers yet.
+    show:
+        title: Customer details
+        general_info: General information
+    new:
+        title: Add a customer
+        save: Add
+        cancel: Cancel
+    edit:
+        title: Edit customer
+        save: Save
+        cancel: Cancel
+    action:
+        new: Add a customer
+        edit: Edit
+        delete: Delete         
+    flash:
+        created: The customer has been successfully created
+        updated: The customer has been successfully updated
+        deleted: The customer has been successfully deleted
+
+# Address
+address:
+    list:
+        title: Address book
+        no_results: You haven't added any addresses yet.       
+    new:
+        title: Add an address
+        save: Add
+        cancel: Cancel
+    edit:
+        title: Edit address
+        save: Save
+        cancel: Cancel   
+    action:
+        new: Add an address
+        edit: Edit
+        delete: Delete             
+    flash:
+        created: The address has been created
+        updated: The address has been updated
+        deleted: The address has been deleted
+       
+# Title
+mrs: Mrs
+miss: Miss
+mr: Mr        
+
+# Form field labels
+form:
+    customer:
+        title: "Title:"
+        first_name: "First name:"
+        last_name: "Last name:"    
+        password: "Password:"
+        enabled: "Enabled:"
+    address:
+        first_name: "First name:"
+        last_name: "Last name:"       
+        street: "Street:"
+        postal_code: "Postal code:"
+        city: "City:"
+        country: "Country:"     

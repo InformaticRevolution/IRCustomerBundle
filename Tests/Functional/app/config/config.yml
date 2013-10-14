@@ -1,0 +1,52 @@
+imports:
+    - { resource: security.yml }
+
+framework:
+    secret: test
+    test: ~
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }    
+    templating:
+        engines: ['twig', 'php']   
+    session:
+        storage_id: session.storage.mock_file
+     
+# Twig Configuration        
+twig:
+    debug:            %kernel.debug%
+    strict_variables: %kernel.debug%        
+        
+# Doctrine Configuration        
+doctrine:
+    dbal:
+        driver: pdo_sqlite
+        path: %kernel.cache_dir%/database.db
+        
+    orm:
+        auto_generate_proxy_classes: %kernel.debug%
+        auto_mapping: true 
+        resolve_target_entities:
+            IR\Bundle\CustomerBundle\Model\CustomerInterface: IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Customer        
+        
+# FOSUser Configuration
+fos_user:
+    firewall_name: main
+    user_class: IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Customer
+    service:
+        mailer: fos_user.mailer.noop
+    profile: false
+
+# StofDoctrineExtensions Configuration            
+stof_doctrine_extensions:
+    orm:
+        default:
+            timestampable: true
+
+# IRCustomer Configuration
+ir_customer:
+    db_driver: orm
+    address:
+        address_class: IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Address

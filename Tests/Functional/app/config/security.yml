@@ -1,0 +1,15 @@
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: plaintext  
+        
+    providers:
+        fos_user:
+            id: fos_user.user_provider.username
+  
+    firewalls:
+        main:
+            pattern: ^/
+            http_basic:
+                provider: fos_user
+            anonymous: true                
+                  

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services 
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="ir_customer.form.type.account.class">IR\Bundle\CustomerBundle\Form\Type\AccountType</parameter>
+    </parameters>    
+    
+    <services>
+        <service id="ir_customer.form.type.account" class="%ir_customer.form.type.account.class%">
+            <argument>%fos_user.model.user.class%</argument>
+            <tag name="form.type" alias="ir_customer_account" />
+        </service>      
+    </services>
+
+</container>

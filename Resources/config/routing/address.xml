@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<routes xmlns="http://symfony.com/schema/routing"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing 
+                            http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="ir_customer_address_list" pattern="/" methods="GET">
+        <default key="_controller">IRCustomerBundle:Address:list</default>
+    </route>
+    
+    <route id="ir_customer_address_new" pattern="/new">
+        <default key="_controller">IRCustomerBundle:Address:new</default>
+    </route>   
+    
+    <route id="ir_customer_address_show" pattern="/{id}" methods="GET">
+        <default key="_controller">IRCustomerBundle:Address:show</default>
+    </route>    
+    
+    <route id="ir_customer_address_edit" pattern="/{id}/edit">
+        <default key="_controller">IRCustomerBundle:Address:edit</default>
+    </route>    
+    
+    <route id="ir_customer_address_delete" pattern="/{id}/delete" methods="GET">
+        <default key="_controller">IRCustomerBundle:Address:delete</default>
+    </route>    
+    
+</routes>

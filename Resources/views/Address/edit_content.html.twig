@@ -1,0 +1,13 @@
+{% trans_default_domain 'ir_customer' %}
+
+<div class="page-header">
+    <h1>{{ 'address.edit.title'|trans }}</h1>
+</div>
+
+<form action="{{ path('ir_customer_address_edit', {'id': id}) }}" {{ form_enctype(form) }} method="POST" novalidate>
+    {% include 'IRCustomerBundle:Address:form.html.twig' %}
+    <div>
+        <button type="submit" class="btn btn-primary">{{ 'address.edit.save'|trans }}</button>
+        <a href="{{ app.request.headers.get('referer') }}" class="btn">{{ 'address.edit.cancel'|trans }}</a>          
+    </div>         
+</form>
