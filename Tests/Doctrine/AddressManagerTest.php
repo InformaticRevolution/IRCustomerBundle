@@ -66,7 +66,7 @@ class AddressManagerTest extends \PHPUnit_Framework_TestCase
         $this->addressManager = new AddressManager($this->objectManager, self::ADDRESS_CLASS);
     }    
     
-     public function testUpdateProduct()
+    public function testUpdateAddress()
     {
         $address = $this->getAddress();
         
@@ -80,7 +80,7 @@ class AddressManagerTest extends \PHPUnit_Framework_TestCase
         $this->addressManager->updateAddress($address);
     }   
 
-    public function testDeleteProduct()
+    public function testDeleteAddress()
     {
         $address = $this->getAddress();
         
