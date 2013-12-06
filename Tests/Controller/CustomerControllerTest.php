@@ -26,9 +26,9 @@ class CustomerControllerTest extends WebTestCase
     
     protected function setUp()
     {
-        $this->client = static::createClient();     
+        $this->client = static::createClient();
         $this->importDatabaseSchema();
-        $this->loadFixtures($this->getFixtures());
+        $this->loadFixtures('customer');
     }    
     
     public function testListAction()
@@ -61,7 +61,7 @@ class CustomerControllerTest extends WebTestCase
                 'title' => Titles::MRS,
                 'firstName' => 'Foo',
                 'lastName' => 'Bar',   
-                'email' => 'tes@example.com',
+                'email' => 'test@example.com',
                 'plainPassword' => '123456',
                 '_token' => $this->generateCsrfToken(static::FORM_INTENTION),
             )
@@ -91,7 +91,6 @@ class CustomerControllerTest extends WebTestCase
                 'firstName' => 'Foo',
                 'lastName' => 'Bar',   
                 'email' => 'test@example.com',
-                'plainPassword' => '123456',
                 '_token' => $this->generateCsrfToken(static::FORM_INTENTION),
             )
         ));     
@@ -119,32 +118,13 @@ class CustomerControllerTest extends WebTestCase
     
     public function testNotFoundHttpWhenCustomerNotExist()
     {
-        $this->client->request('GET', '/customers/4');
+        $this->client->request('GET', '/customers/foo');
         $this->assertResponseStatusCode(404);
         
-        $this->client->request('GET', '/customers/4/edit');
+        $this->client->request('GET', '/customers/foo/edit');
         $this->assertResponseStatusCode(404);
         
-        $this->client->request('GET', '/customers/4/delete');
+        $this->client->request('GET', '/customers/foo/delete');
         $this->assertResponseStatusCode(404);        
-    }    
-    
-    /**
-     * Returns test fixtures.
-     * 
-     * @return array
-     */    
-    protected function getFixtures()
-    {
-        return array(           
-            'IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Customer' => array(
-                'customer{1..3}' => array(
-                    'firstName' => '<firstName()>',
-                    'lastName' => '<lastName()>',
-                    'email' => '<email()>',
-                    'plainPassword' => '<word()>',
-                )
-            )         
-        );
-    }    
+    }   
 }

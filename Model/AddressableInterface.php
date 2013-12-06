@@ -30,7 +30,7 @@ interface AddressableInterface
     /**
      * Sets the billing address.
      *
-     * @param AddressInterface $billingAddress
+     * @param AddressInterface|null $billingAddress
      */
     public function setBillingAddress(AddressInterface $billingAddress = null);    
     
@@ -44,7 +44,7 @@ interface AddressableInterface
     /**
      * Sets the shipping address.
      *
-     * @param AddressInterface $shippingAddress
+     * @param AddressInterface|null $shippingAddress
      */
     public function setShippingAddress(AddressInterface $shippingAddress = null);    
     

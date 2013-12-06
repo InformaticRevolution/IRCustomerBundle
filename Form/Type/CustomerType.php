@@ -11,8 +11,9 @@
 
 namespace IR\Bundle\CustomerBundle\Form\Type;
 
-use Symfony\Component\Form\FormBuilderInterface;
 use FOS\UserBundle\Form\Type\ProfileFormType;
+use Symfony\Component\Form\FormBuilderInterface;
+use IR\Bundle\CustomerBundle\Form\EventListener\BuildCustomerFormListener;
 
 /**
  * Customer Type.
@@ -47,12 +48,14 @@ class CustomerType extends ProfileFormType
             ->add('plainPassword', 'password', array(
                 'label' => 'form.customer.password',
                 'translation_domain' => 'ir_customer',
-            ))    
+                'validation_groups' => 'NewCustomer',
+            ))                
             ->add('enabled', 'checkbox', array(
                 'label' => 'form.customer.enabled',
                 'translation_domain' => 'ir_customer',
             ))                
             ->remove('username')
+            ->addEventSubscriber(new BuildCustomerFormListener());
         ;        
     }
 

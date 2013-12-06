@@ -136,6 +136,7 @@ abstract class Customer extends User implements CustomerInterface, AddressableIn
     public function setEmail($email)
     {
         parent::setEmail($email);
+        
         $this->setUsername($email);
     }      
     

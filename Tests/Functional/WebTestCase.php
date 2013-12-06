@@ -12,7 +12,10 @@
 namespace IR\Bundle\CustomerBundle\Tests\Functional;
 
 use Nelmio\Alice\Fixtures;
+
 use Doctrine\ORM\Tools\SchemaTool;
+use Doctrine\ORM\EntityManagerInterface;
+
 use Symfony\Component\BrowserKit\Client;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase as BaseWebTestCase;
@@ -33,9 +36,9 @@ class WebTestCase extends BaseWebTestCase
     /**
      * Creates a fresh database.
      */
-    protected function importDatabaseSchema()
+    protected final function importDatabaseSchema()
     {        
-        $em = static::$kernel->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $this->getEntityManager();
         $metadata = $em->getMetadataFactory()->getAllMetadata();
         
         if (!empty($metadata)) {
@@ -43,16 +46,28 @@ class WebTestCase extends BaseWebTestCase
             $schemaTool->dropDatabase();
             $schemaTool->createSchema($metadata);
         }        
-    }    
+    }     
 
-    /*
-     * Loads fixtures into the database.
+    /**
+     * Loads test fixtures from given file.
      * 
-     * @param array $fixtures
+     * @param string $filename
+     * 
+     * @return array
      */    
-    protected function loadFixtures(array $fixtures)
+    protected function loadFixtures($filename)
     {
-        Fixtures::load($fixtures, static::$kernel->getContainer()->get('doctrine.orm.entity_manager'));       
+        return Fixtures::load(sprintf(__DIR__.'/Fixtures/%s.yml', $filename), $this->getEntityManager());
+    }     
+
+    /**
+     * Returns doctrine orm entity manager.
+     * 
+     * @return EntityManagerInterface
+     */
+    public function getEntityManager()
+    {        
+        return static::$kernel->getContainer()->get('doctrine.orm.entity_manager');
     }    
     
     /**

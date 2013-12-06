@@ -30,9 +30,9 @@ final class Titles
     public static function getTitles()
     {
         return array(
-            self::MRS    => 'mrs',
-            self::MISS   => 'miss',
-            self::MISTER => 'mr',
+            static::MRS    => 'mrs',
+            static::MISS   => 'miss',
+            static::MISTER => 'mr',
         );
     }
 }

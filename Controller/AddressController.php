@@ -30,7 +30,7 @@ use IR\Bundle\CustomerBundle\Model\AddressInterface;
 class AddressController extends ContainerAware
 {
     /**
-     * List all the customer's addresses.
+     * List all the customers' addresses.
      */    
     public function listAction()
     {

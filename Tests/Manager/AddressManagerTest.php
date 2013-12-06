@@ -34,13 +34,13 @@ class AddressManagerTest extends \PHPUnit_Framework_TestCase
         
         $this->addressManager->expects($this->any())
             ->method('getClass')
-            ->will($this->returnValue(self::ADDRESS_CLASS));        
+            ->will($this->returnValue(static::ADDRESS_CLASS));        
     }
     
     public function testCreateAddress()
     {        
         $address = $this->addressManager->createAddress();
         
-        $this->assertInstanceOf(self::ADDRESS_CLASS, $address);
+        $this->assertInstanceOf(static::ADDRESS_CLASS, $address);
     }
 }

@@ -60,24 +60,87 @@ class IRCustomerExtensionTest extends \PHPUnit_Framework_TestCase
         unset($config['address']['address_class']);
         $loader->load(array($config), new ContainerBuilder());
     }    
-    
-    public function testCustomerLoadAddressClassesWithDefaults()
-    {
-        $this->createEmptyConfiguration();
 
-        $this->assertNotHasDefinition('ir_customer.manager.address');
-        $this->assertNotHasDefinition('ir_customer.form.address');
+    public function testDisableCustomer()
+    {
+        $this->configuration = new ContainerBuilder();
+        $loader = new IRCustomerExtension();
+        $config = $this->getEmptyConfig();
+        $config['customer'] = false;
+        $loader->load(array($config), $this->configuration);
+        $this->assertNotHasDefinition('ir_customer.form.customer');
     }    
     
-    public function testCustomerLoadAddressClasses()
+    public function testCustomerLoadModelClass()
     {
         $this->createFullConfiguration();
 
-        $this->assertAlias('ir_customer.manager.address.default', 'ir_customer.manager.address');
-        $this->assertParameter('acme_customer_address', 'ir_customer.form.type.address');
-        $this->assertParameter('acme_customer_address_form', 'ir_customer.form.name.address');
-        $this->assertHasDefinition('ir_customer.form.address');
+        $this->assertParameter('Acme\CustomerBundle\Entity\Address', 'ir_customer.model.address.class');
+    }         
+    
+    public function testCustomerLoadManagerClassWithDefaults()
+    {
+        $this->createEmptyConfiguration();
+
+        $this->assertParameter('orm', 'ir_customer.db_driver');
+        $this->assertNotHasDefinition('ir_customer.manager.address');
     }    
+    
+    public function testCustomerLoadManagerClass()
+    {
+        $this->createFullConfiguration();
+
+        $this->assertParameter('orm', 'ir_customer.db_driver');
+        $this->assertAlias('ir_customer.manager.address.default', 'ir_customer.manager.address');
+    }       
+    
+    public function testCustomerLoadFormClassWithDefaults()
+    {
+        $this->createEmptyConfiguration();
+
+        $this->assertParameter('ir_customer', 'ir_customer.form.type.customer');
+        $this->assertNotHasDefinition('ir_customer.form.type.address');
+    }    
+    
+    public function testCustomerLoadFormClass()
+    {
+        $this->createFullConfiguration();
+
+        $this->assertParameter('acme_customer', 'ir_customer.form.type.customer');
+        $this->assertParameter('acme_customer_address', 'ir_customer.form.type.address');
+    }  
+    
+    public function testCustomerLoadFormNameWithDefaults()
+    {
+        $this->createEmptyConfiguration();
+
+        $this->assertParameter('ir_customer_form', 'ir_customer.form.name.customer');
+        $this->assertNotHasDefinition('ir_customer.form.name.address');
+    }
+
+    public function testCustomerLoadFormName()
+    {
+        $this->createFullConfiguration();
+
+        $this->assertParameter('acme_customer_form', 'ir_customer.form.name.customer');
+        $this->assertParameter('acme_customer_address_form', 'ir_customer.form.name.address');
+    }     
+    
+    public function testCustomerLoadFormServiceWithDefaults()
+    {
+        $this->createEmptyConfiguration();
+
+        $this->assertHasDefinition('ir_customer.form.customer');
+        $this->assertNotHasDefinition('ir_customer.form.address');
+    }       
+    
+    public function testCustomerLoadFormService()
+    {
+        $this->createFullConfiguration();
+
+        $this->assertHasDefinition('ir_customer.form.customer');
+        $this->assertHasDefinition('ir_customer.form.address');
+    }     
 
     protected function createEmptyConfiguration()
     {
@@ -102,33 +165,21 @@ class IRCustomerExtensionTest extends \PHPUnit_Framework_TestCase
      */
     protected function getEmptyConfig()
     {
-        $yaml = <<<EOF
-db_driver: orm
-EOF;
         $parser = new Parser();
 
-        return $parser->parse($yaml);
-    } 
-    
+        return $parser->parse(file_get_contents(__DIR__.'/Fixtures/minimal_config.yml'));
+    }     
+
     /**
      * @return array
      */    
     protected function getFullConfig()
     {
-        $yaml = <<<EOF
-db_driver: orm
-address:
-    address_class: Acme\CustomerBundle\Entity\Address
-    form:
-        type: acme_customer_address
-        name: acme_customer_address_form 
-        validation_groups: [acme_address]
-EOF;
         $parser = new Parser();
 
-        return $parser->parse($yaml);
-    }     
-    
+        return $parser->parse(file_get_contents(__DIR__.'/Fixtures/full_config.yml'));
+    }    
+
     /**
      * @param string $value
      * @param string $key

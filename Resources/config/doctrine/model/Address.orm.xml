@@ -4,11 +4,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="IR\Bundle\CustomerBundle\Model\Address">
-        <many-to-one field="customer" target-entity="IR\Bundle\CustomerBundle\Model\CustomerInterface" inversed-by="addresses">
-            <join-column name="customer_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
-        </many-to-one>          
-        
+    <mapped-superclass name="IR\Bundle\CustomerBundle\Model\Address">        
         <field name="firstName" column="first_name" type="string" length="255" />
         
         <field name="lastName" column="last_name" type="string" length="255" />        
@@ -20,6 +16,10 @@
         <field name="city" column="city" type="string" length="255" />
         
         <field name="country" column="country" type="string" length="2" />
+        
+        <many-to-one field="customer" target-entity="IR\Bundle\CustomerBundle\Model\CustomerInterface" inversed-by="addresses">
+            <join-column name="customer_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
+        </many-to-one>           
     </mapped-superclass>
     
 </doctrine-mapping>

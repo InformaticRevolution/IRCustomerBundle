@@ -52,7 +52,7 @@ interface AddressManagerInterface
     public function findAddressBy(array $criteria);      
     
     /**
-     * Returns the address's fully qualified class name.
+     * Returns the addresses' fully qualified class name.
      *
      * @return string
      */

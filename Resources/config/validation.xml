@@ -58,17 +58,6 @@
                     <value>Customer</value>   
                 </option>
             </constraint>
-            <constraint name="Length">
-                <option name="min">2</option>
-                <option name="minMessage">ir_customer.email.min_length</option>
-                <option name="max">254</option>
-                <option name="maxMessage">ir_customer.email.max_length</option>
-                <option name="groups">
-                    <value>CRegistration</value>
-                    <value>Account</value>
-                    <value>Customer</value>   
-                </option>
-            </constraint>
             <constraint name="Email">
                 <option name="message">ir_customer.email.invalid</option>
                 <option name="groups">
@@ -86,7 +75,7 @@
                     <value>CRegistration</value>
                     <value>ResetPassword</value>
                     <value>ChangePassword</value>
-                    <value>Customer</value>   
+                    <value>NewCustomer</value>   
                 </option>
             </constraint>
             <constraint name="Length">

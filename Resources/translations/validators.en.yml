@@ -11,8 +11,6 @@ ir_customer:
   
     email:
         not_blank: Please enter an e-mail address
-        min_length: The e-mail address must be at least {{ limit }} characters long
-        max_length: The e-mail address cannot be longer than {{ limit }} characters    
         invalid: The e-mail address is not valid
         already_used: This e-mail address is already associated to an account
         

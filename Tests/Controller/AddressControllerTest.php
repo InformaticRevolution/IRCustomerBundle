@@ -21,18 +21,17 @@ use IR\Bundle\CustomerBundle\Tests\Functional\WebTestCase;
 class AddressControllerTest extends WebTestCase
 {   
     const FORM_INTENTION = 'address';
-    const AUTHENTICATION_USER = 'test@example.com';
-    const AUTHENTICATION_PW = '123456';
 
     
     protected function setUp()
-    {
+    {             
         $this->client = static::createClient(array(), array(
-            'PHP_AUTH_USER' => static::AUTHENTICATION_USER,
-            'PHP_AUTH_PW'   => static::AUTHENTICATION_PW,            
-        ));     
+            'PHP_AUTH_USER' => 'test@example.com',
+            'PHP_AUTH_PW'   => '123456',            
+        ));    
+     
         $this->importDatabaseSchema();
-        $this->loadFixtures($this->getFixtures());
+        $this->loadFixtures('address');
     }
         
     public function testListAction()
@@ -42,7 +41,7 @@ class AddressControllerTest extends WebTestCase
         $this->assertResponseStatusCode(200);
         $this->assertCount(3, $crawler->filter('li'));
     }
-
+    
     public function testNewActionGetMethod()
     {
         $crawler = $this->client->request('GET', '/addresses/new');
@@ -145,48 +144,10 @@ class AddressControllerTest extends WebTestCase
     
     public function testNotFoundHttpWhenAddressNotExist()
     {
-        $this->client->request('GET', '/addresses/5/edit');
+        $this->client->request('GET', '/addresses/foo/edit');
         $this->assertResponseStatusCode(404);
         
-        $this->client->request('GET', '/addresses/5/delete');
+        $this->client->request('GET', '/addresses/foo/delete');
         $this->assertResponseStatusCode(404);        
-    }
-
-    /**
-     * Returns test fixtures.
-     * 
-     * @return array
-     */    
-    protected function getFixtures()
-    {
-        return array(           
-            'IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Customer' => array(
-                'customer1' => array(
-                    'firstName' => '<firstName()>',
-                    'lastName' => '<lastName()>',
-                    'email' => static::AUTHENTICATION_USER,
-                    'plainPassword' => static::AUTHENTICATION_PW,
-                    'enabled' => true,
-                    'addresses' => array('@address1', '@address2', '@address3'),
-                ),
-                'customer2' => array(
-                    'firstName' => '<firstName()>',
-                    'lastName' => '<lastName()>',
-                    'email' => '<email()>',
-                    'plainPassword' => '<word()>',
-                    'addresses' => array('@address4'),
-                )
-            ),
-            'IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Address' => array(            
-                'address{1..4}' => array(
-                    'firstName' => '<firstName()>',
-                    'lastName' => '<lastName()>',
-                    'street' => '<streetAddress()>',
-                    'postalCode' => '<postcode()>',
-                    'city' => '<city()>',
-                    'country' => '<countryCode()>',
-                )
-            )          
-        );
-    }      
+    }  
 }

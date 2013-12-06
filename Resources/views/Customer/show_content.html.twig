@@ -4,47 +4,56 @@
     <h1>{{ 'customer.show.title'|trans }}</h1>
 </div>  
 
-<div class="panel panel-default">
-    <div class="panel-body">     
-        <a href="{{ path('ir_customer_edit', {'id': customer.id}) }}" class="btn btn-primary">
-            <i class="glyphicon glyphicon-edit"></i> {{ 'customer.action.edit'|trans }}
-        </a>
-        <a href="{{ path('ir_customer_delete', {'id': customer.id}) }}" class="btn btn-danger">
-            <i class="glyphicon glyphicon-trash"></i> {{ 'customer.action.delete'|trans }}
-        </a>
-    </div>
+<div class="well well-sm">
+    <a href="{{ path('ir_customer_edit', {'id': customer.id}) }}" class="btn btn-primary">
+        <i class="glyphicon glyphicon-edit"></i> {{ 'customer.action.edit'|trans }}
+    </a>
+    <a href="{{ path('ir_customer_delete', {'id': customer.id}) }}" class="btn btn-danger">
+        <i class="glyphicon glyphicon-trash"></i> {{ 'customer.action.delete'|trans }}
+    </a>
 </div>
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th colspan="2">{{ 'customer.show.general_info'|trans }}</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>{{ 'customer.title'|trans }}</td>
-            <td>{{ customer.title|trans }}</td>        
-        </tr>
-        <tr>
-            <td>{{ 'customer.first_name'|trans }}</td>
-            <td>{{ customer.firstName }}</td>
-        </tr>
-        <tr>
-            <td>{{ 'customer.last_name'|trans }}</td>
-            <td>{{ customer.lastName }}</td>
-        </tr> 
-        <tr>
-            <td>{{ 'customer.email'|trans }}</td>
-            <td>{{ customer.email }}</td>
-        </tr>    
-        <tr>
-            <td>{{ 'customer.last_login'|trans }}</td>
-            <td>{{ customer.lastLogin|date }}</td>
-        </tr> 
-        <tr>
-            <td>{{ 'customer.created_at'|trans }}</td>
-            <td>{{ customer.createdAt|date }}</td>
-        </tr>         
-    </tbody>
-</table>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        {{ 'customer.show.general_info'|trans }}
+    </div>
+
+    <table class="table table-bordered">
+        <colgroup>
+            <col width="25%" />
+            <col width="75%" />
+        </colgroup>           
+        <tbody>
+            <tr>
+                <td>{{ 'customer.title'|trans }}</td>
+                <td>{{ customer.title|trans }}</td>        
+            </tr>
+            <tr>
+                <td>{{ 'customer.first_name'|trans }}</td>
+                <td>{{ customer.firstName }}</td>
+            </tr>
+            <tr>
+                <td>{{ 'customer.last_name'|trans }}</td>
+                <td>{{ customer.lastName }}</td>
+            </tr> 
+            <tr>
+                <td>{{ 'customer.email'|trans }}</td>
+                <td>{{ customer.email }}</td>
+            </tr>    
+            <tr>
+                <td>{{ 'customer.enabled'|trans }}</td>
+                <td>
+                    <i class="glyphicon glyphicon-{{ customer.enabled ? 'ok' : 'remove' }}"></i>  
+                </td>
+            </tr>                
+            <tr>
+                <td>{{ 'customer.last_login'|trans }}</td>
+                <td>{{ customer.lastLogin|date }}</td>
+            </tr> 
+            <tr>
+                <td>{{ 'customer.created_at'|trans }}</td>
+                <td>{{ customer.createdAt|date }}</td>
+            </tr>         
+        </tbody>
+    </table>
+</div>

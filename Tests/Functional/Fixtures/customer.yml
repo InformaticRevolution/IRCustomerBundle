@@ -1,0 +1,6 @@
+IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Customer:
+    customer{1..3}:
+        firstName: <firstName()> 
+        lastName: <lastName()> 
+        email: <email()>
+        plainPassword: <word()>

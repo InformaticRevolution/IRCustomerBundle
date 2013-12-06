@@ -51,19 +51,19 @@ class AddressManagerTest extends \PHPUnit_Framework_TestCase
                 
         $this->objectManager->expects($this->any())
             ->method('getRepository')
-            ->with($this->equalTo(self::ADDRESS_CLASS))
+            ->with($this->equalTo(static::ADDRESS_CLASS))
             ->will($this->returnValue($this->repository));        
 
         $this->objectManager->expects($this->any())
             ->method('getClassMetadata')
-            ->with($this->equalTo(self::ADDRESS_CLASS))
+            ->with($this->equalTo(static::ADDRESS_CLASS))
             ->will($this->returnValue($class));        
         
         $class->expects($this->any())
             ->method('getName')
-            ->will($this->returnValue(self::ADDRESS_CLASS));        
+            ->will($this->returnValue(static::ADDRESS_CLASS));        
         
-        $this->addressManager = new AddressManager($this->objectManager, self::ADDRESS_CLASS);
+        $this->addressManager = new AddressManager($this->objectManager, static::ADDRESS_CLASS);
     }    
     
     public function testUpdateAddress()
@@ -108,7 +108,7 @@ class AddressManagerTest extends \PHPUnit_Framework_TestCase
     
     public function testGetClass()
     {
-        $this->assertEquals(self::ADDRESS_CLASS, $this->addressManager->getClass());
+        $this->assertEquals(static::ADDRESS_CLASS, $this->addressManager->getClass());
     }
 
     /**
@@ -116,8 +116,8 @@ class AddressManagerTest extends \PHPUnit_Framework_TestCase
      */
     protected function getAddress()
     {
-        $addressClass = static::ADDRESS_CLASS;
+        $class = static::ADDRESS_CLASS;
 
-        return new $addressClass();
+        return new $class();
     }    
 }
