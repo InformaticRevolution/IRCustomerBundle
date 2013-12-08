@@ -11,7 +11,7 @@ ir_customer:
 
     address:
         title:
-            not_blank: Please enter a title
+            not_null: Please enter a title
             
         first_name:
             not_blank: Please enter a first name
