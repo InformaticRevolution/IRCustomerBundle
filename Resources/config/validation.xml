@@ -147,6 +147,15 @@
                 </option>                   
             </constraint>
         </property>  
+        
+        <property name="phone">
+            <constraint name="NotBlank">
+                <option name="message">ir_customer.address.phone.not_blank</option>
+                <option name="groups">
+                    <value>Address</value>
+                </option>                   
+            </constraint>           
+        </property>         
     </class>
     
 </constraint-mapping>        

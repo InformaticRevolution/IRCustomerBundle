@@ -142,5 +142,19 @@ interface AddressInterface
      *
      * @param string $country
      */
-    public function setCountry($country);      
+    public function setCountry($country);
+    
+    /**
+     * Returns the phone.
+     *
+     * @return string
+     */
+    public function getPhone();
+
+    /**
+     * Sets the phone.
+     *
+     * @param string $phone
+     */
+    public function setPhone($phone);    
 }

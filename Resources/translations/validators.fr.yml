@@ -38,3 +38,6 @@ ir_customer:
 
         country:
             not_blank: Veuillez sélectionner un pays
+            
+        phone: 
+            not_blank: Veuillez saisir un numéro de téléphone            

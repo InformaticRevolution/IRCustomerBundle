@@ -46,6 +46,7 @@ class AddressTest extends \PHPUnit_Framework_TestCase
             array('postalCode', '63419', null),
             array('city', 'New York', null),
             array('country', 'US', null),
+            array('phone', '132-149-0269', null),
         );
     }     
     

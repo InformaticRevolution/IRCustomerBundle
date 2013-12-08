@@ -37,4 +37,7 @@ ir_customer:
             max_length: The city cannot be longer than {{ limit }} characters
 
         country:
-            not_blank: Please select a country           
+            not_blank: Please select a country  
+            
+        phone:
+            not_blank: Please select a phone number            

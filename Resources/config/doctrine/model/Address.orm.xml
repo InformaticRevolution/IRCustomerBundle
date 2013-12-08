@@ -20,6 +20,8 @@
         
         <field name="country" column="country" type="string" length="2" />
         
+        <field name="phone" column="phone" type="string" length="255" />
+        
         <many-to-one field="customer" target-entity="IR\Bundle\CustomerBundle\Model\CustomerInterface" inversed-by="addresses">
             <join-column name="customer_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
         </many-to-one>           

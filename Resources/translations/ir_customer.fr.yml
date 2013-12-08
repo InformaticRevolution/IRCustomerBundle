@@ -68,6 +68,7 @@ form:
         postal_code: "Code postal :"
         city: "Ville :"
         country: "Pays :"
+        phone: "Numéro de téléphone :"
         
         
                

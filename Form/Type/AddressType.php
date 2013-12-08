@@ -72,7 +72,11 @@ class AddressType extends AbstractType
                 'empty_value' => '',
                 'label' => 'form.address.country', 
                 'translation_domain' => 'ir_customer',
-            ))                
+            ))    
+            ->add('phone', null, array(
+                'label' => 'form.address.phone', 
+                'translation_domain' => 'ir_customer',
+            ))                    
         ;
     }
 

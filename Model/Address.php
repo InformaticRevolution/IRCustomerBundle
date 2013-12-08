@@ -61,7 +61,12 @@ abstract class Address implements AddressInterface
     /**
      * @var string
      */
-    protected $country;    
+    protected $country;  
+    
+    /**
+     * @var string
+     */
+    protected $phone;    
     
     
     /**
@@ -206,5 +211,21 @@ abstract class Address implements AddressInterface
     public function setCountry($country)
     {
         $this->country = $country;
+    }    
+    
+    /**
+     * {@inheritdoc}
+     */   
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */   
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
     }    
 }
