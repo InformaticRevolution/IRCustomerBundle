@@ -11,6 +11,7 @@
 
 namespace IR\Bundle\CustomerBundle\Tests\Controller;
 
+use IR\Bundle\CustomerBundle\Model\Titles;
 use IR\Bundle\CustomerBundle\Tests\Functional\WebTestCase;
 
 /**
@@ -54,6 +55,7 @@ class AddressControllerTest extends WebTestCase
     {        
         $this->client->request('POST', '/addresses/new', array(
             'ir_customer_address_form' => array (
+                'title' => Titles::MRS,
                 'firstName' => 'Jackson',
                 'lastName' => 'Parker',
                 'street' => '439 Karley Loaf Suite',
@@ -85,6 +87,7 @@ class AddressControllerTest extends WebTestCase
     {        
         $this->client->request('POST', '/addresses/1/edit', array(
             'ir_customer_address_form' => array (
+                'title' => Titles::MRS,
                 'firstName' => 'Foo',
                 'lastName' => 'Bar',
                 'street' => '439 Karley Loaf Suite',

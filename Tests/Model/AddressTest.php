@@ -11,6 +11,7 @@
 
 namespace IR\Bundle\CustomerBundle\Tests\Model;
 
+use IR\Bundle\CustomerBundle\Model\Titles;
 use IR\Bundle\CustomerBundle\Model\Address;
 
 /**
@@ -38,6 +39,7 @@ class AddressTest extends \PHPUnit_Framework_TestCase
     public function getSimpleTestData()
     {
         return array(
+            array('Title', Titles::MISTER, null), 
             array('Firstname', 'James', null),
             array('Lastname', 'Brown', null),
             array('street', '439 Karley Loaf Suite', null),

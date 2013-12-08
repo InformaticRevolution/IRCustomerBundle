@@ -27,6 +27,11 @@ abstract class Address implements AddressInterface
      * @var CustomerInterface
      */
     protected $customer;    
+
+    /**
+     * @var string
+     */
+    protected $title;    
     
     /**
      * @var string
@@ -82,6 +87,22 @@ abstract class Address implements AddressInterface
     {
         $this->customer = $customer;
     }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+            
+    /**
+     * {@inheritdoc}
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }     
     
     /**
      * {@inheritdoc}

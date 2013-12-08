@@ -5,53 +5,9 @@
                                         http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
     <class name="IR\Bundle\CustomerBundle\Model\Customer">
-        <property name="firstName">
-            <constraint name="NotBlank">
-                <option name="message">ir_customer.first_name.not_blank</option>  
-                <option name="groups">
-                    <value>CRegistration</value>
-                    <value>Account</value>
-                    <value>Customer</value>
-                </option>                
-            </constraint>
-            <constraint name="Length">
-                <option name="min">2</option>
-                <option name="max">255</option>
-                <option name="minMessage">ir_customer.first_name.min_length</option>
-                <option name="maxMessage">ir_customer.first_name.max_length</option> 
-                <option name="groups">
-                    <value>CRegistration</value>
-                    <value>Account</value>
-                    <value>Customer</value>                    
-                </option>                    
-            </constraint>
-        </property>  
-        
-        <property name="lastName">
-            <constraint name="NotBlank">
-                <option name="message">ir_customer.last_name.not_blank</option>
-                <option name="groups">
-                    <value>CRegistration</value>
-                    <value>Account</value>
-                    <value>Customer</value>                    
-                </option>                    
-            </constraint>
-            <constraint name="Length">
-                <option name="min">2</option>
-                <option name="max">255</option>
-                <option name="minMessage">ir_customer.last_name.min_length</option>
-                <option name="maxMessage">ir_customer.last_name.max_length</option> 
-                <option name="groups">
-                    <value>CRegistration</value>
-                    <value>Account</value>
-                    <value>Customer</value>                    
-                </option>                    
-            </constraint>
-        </property>
-        
         <property name="email">
             <constraint name="NotBlank">
-                <option name="message">ir_customer.email.not_blank</option>
+                <option name="message">ir_customer.customer.email.not_blank</option>
                 <option name="groups">
                     <value>CRegistration</value>
                     <value>Account</value>
@@ -59,7 +15,7 @@
                 </option>
             </constraint>
             <constraint name="Email">
-                <option name="message">ir_customer.email.invalid</option>
+                <option name="message">ir_customer.customer.email.invalid</option>
                 <option name="groups">
                     <value>CRegistration</value>
                     <value>Account</value>
@@ -70,7 +26,7 @@
         
         <property name="plainPassword">
             <constraint name="NotBlank">
-                <option name="message">ir_customer.password.not_blank</option>
+                <option name="message">ir_customer.customer.password.not_blank</option>
                 <option name="groups">
                     <value>CRegistration</value>
                     <value>ResetPassword</value>
@@ -81,7 +37,7 @@
             <constraint name="Length">
                 <option name="min">6</option>
                 <option name="max">4096</option>
-                <option name="minMessage">ir_customer.password.min_length</option>
+                <option name="minMessage">ir_customer.customer.password.min_length</option>
                 <option name="groups">
                     <value>CRegistration</value>
                     <value>ResetPassword</value>
@@ -89,13 +45,22 @@
                     <value>Customer</value>
                 </option>
             </constraint>
-        </property>                                  
+        </property>                                                                
     </class>
     
     <class name="IR\Bundle\CustomerBundle\Model\Address">
+        <property name="title">
+            <constraint name="NotNull">
+                <option name="message">ir_customer.address.title.not_null</option> 
+                <option name="groups">
+                    <value>Address</value>
+                </option>                          
+            </constraint>           
+        </property>
+
         <property name="firstName">
             <constraint name="NotBlank">
-                <option name="message">ir_customer.first_name.not_blank</option> 
+                <option name="message">ir_customer.address.first_name.not_blank</option> 
                 <option name="groups">
                     <value>Address</value>
                 </option>                          
@@ -103,8 +68,8 @@
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="max">255</option>
-                <option name="minMessage">ir_customer.first_name.min_length</option>
-                <option name="maxMessage">ir_customer.first_name.max_length</option> 
+                <option name="minMessage">ir_customer.address.first_name.min_length</option>
+                <option name="maxMessage">ir_customer.address.first_name.max_length</option> 
                 <option name="groups">
                     <value>Address</value>
                 </option>                        
@@ -113,7 +78,7 @@
         
         <property name="lastName">
             <constraint name="NotBlank">
-                <option name="message">ir_customer.last_name.not_blank</option> 
+                <option name="message">ir_customer.address.last_name.not_blank</option> 
                 <option name="groups">
                     <value>Address</value>
                 </option>                             
@@ -121,8 +86,8 @@
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="max">255</option>
-                <option name="minMessage">ir_customer.last_name.min_length</option>
-                <option name="maxMessage">ir_customer.last_name.max_length</option>
+                <option name="minMessage">ir_customer.address.last_name.min_length</option>
+                <option name="maxMessage">ir_customer.address.last_name.max_length</option>
                 <option name="groups">
                     <value>Address</value>
                 </option>                                  
@@ -131,7 +96,7 @@
         
         <property name="street">
             <constraint name="NotBlank">
-                <option name="message">ir_customer.street.not_blank</option>
+                <option name="message">ir_customer.address.street.not_blank</option>
                 <option name="groups">
                     <value>Address</value>
                 </option>                   
@@ -139,8 +104,8 @@
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="max">255</option>
-                <option name="minMessage">ir_customer.street.min_length</option>
-                <option name="maxMessage">ir_customer.street.max_length</option>
+                <option name="minMessage">ir_customer.address.street.min_length</option>
+                <option name="maxMessage">ir_customer.address.street.max_length</option>
                 <option name="groups">
                     <value>Address</value>
                 </option>                                  
@@ -149,7 +114,7 @@
         
         <property name="postalCode">
             <constraint name="NotBlank">
-                <option name="message">ir_customer.postal_code.not_blank</option>
+                <option name="message">ir_customer.address.postal_code.not_blank</option>
                 <option name="groups">
                     <value>Address</value>
                 </option>                   
@@ -158,7 +123,7 @@
                 
         <property name="city">
             <constraint name="NotBlank">
-                <option name="message">ir_customer.city.not_blank</option>
+                <option name="message">ir_customer.address.city.not_blank</option>
                 <option name="groups">
                     <value>Address</value>
                 </option>                   
@@ -166,8 +131,8 @@
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="max">255</option>
-                <option name="minMessage">ir_customer.city.min_length</option>
-                <option name="maxMessage">ir_customer.city.max_length</option>
+                <option name="minMessage">ir_customer.address.city.min_length</option>
+                <option name="maxMessage">ir_customer.address.city.max_length</option>
                 <option name="groups">
                     <value>Address</value>
                 </option>                                  
@@ -176,7 +141,7 @@
         
         <property name="country">
             <constraint name="NotBlank">
-                <option name="message">ir_customer.country.not_blank</option>
+                <option name="message">ir_customer.address.country.not_blank</option>
                 <option name="groups">
                     <value>Address</value>
                 </option>                   

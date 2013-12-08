@@ -23,21 +23,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 abstract class Customer extends User implements CustomerInterface, AddressableInterface
 {
     /**
-     * @var string
-     */
-    protected $title;    
-    
-    /**
-     * @var string
-     */
-    protected $firstName;
-    
-    /**
-     * @var string
-     */
-    protected $lastName; 
-
-    /**
      * @var AddressInterface 
      */    
     protected $billingAddress;
@@ -70,66 +55,9 @@ abstract class Customer extends User implements CustomerInterface, AddressableIn
     {
         parent::__construct();
         
-        $this->title = Titles::MRS;
         $this->addresses = new ArrayCollection();
     }      
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-            
-    /**
-     * {@inheritdoc}
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }     
-    
-    /**
-     * {@inheritdoc}
-     */   
-    public function getFirstName()
-    {
-        return $this->firstName;
-    }
-        
-    /**
-     * {@inheritdoc}
-     */   
-    public function setFirstName($firstName)
-    {
-        $this->firstName = $firstName;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */   
-    public function getLastName()
-    {
-        return $this->lastName;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */   
-    public function setLastName($lastName)
-    {
-        $this->lastName = $lastName;
-    } 
-    
-    /**
-     * {@inheritdoc}
-     */       
-    public function getFullName()
-    {
-        return $this->firstName.' '.$this->lastName;
-    }    
-    
     /**
      * {@inheritdoc}
      */       
@@ -247,15 +175,5 @@ abstract class Customer extends User implements CustomerInterface, AddressableIn
     public function setUpdatedAt(\Datetime $updatedAt = null)
     {
         $this->updatedAt = $updatedAt;        
-    }     
-        
-    /**
-     * Returns the customer first name.
-     *
-     * @return string
-     */         
-    public function __toString()
-    {
-        return (string) $this->getFirstName();
     }
 }

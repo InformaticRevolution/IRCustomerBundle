@@ -15,7 +15,6 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>{{ 'customer.full_name'|trans }}</th>  
                 <th>{{ 'customer.email'|trans }}</th> 
                 <th>{{ 'customer.enabled'|trans }}</th> 
                 <th></th>             
@@ -25,7 +24,6 @@
         <tbody>
         {% for customer in customers %}
             <tr>
-                <td>{{ customer.fullName }}</td>
                 <td>{{ customer.email }}</td>
                 <td>
                     <i class="glyphicon glyphicon-{{ customer.enabled ? 'ok' : 'remove' }}"></i>         

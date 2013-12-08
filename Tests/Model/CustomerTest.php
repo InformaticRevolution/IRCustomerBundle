@@ -11,7 +11,6 @@
 
 namespace IR\Bundle\CustomerBundle\Tests\Model;
 
-use IR\Bundle\CustomerBundle\Model\Titles;
 use IR\Bundle\CustomerBundle\Model\Customer;
 use IR\Bundle\CustomerBundle\Model\Address;
 
@@ -120,9 +119,6 @@ class CustomerTest extends \PHPUnit_Framework_TestCase
     public function getSimpleTestData()
     {
         return array(
-            array('Title', Titles::MISTER, Titles::MRS), 
-            array('Firstname', 'James', null),
-            array('Lastname', 'Brown', null),
             array('createdAt', new \DateTime(), null),
             array('updatedAt', new \DateTime(), null),            
         );

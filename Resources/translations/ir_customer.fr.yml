@@ -1,9 +1,5 @@
 # Customer
 customer:
-    title: Civilité
-    first_name: Prénom
-    last_name: Nom
-    full_name: Nom complet
     email: Adresse e-mail  
     last_login: Dernière connexion
     enabled: Activé
@@ -61,13 +57,11 @@ mr: Monsieur
 
 # Form field labels
 form:
-    customer:
-        title: "Civilité :"
-        first_name: "Prénom :"
-        last_name: "Nom :"   
+    customer:        
         password: "Mot de passe :"
         enabled: "Activé :"
     address:
+        title: "Civilité :"
         first_name: "Prénom :"
         last_name: "Nom :"        
         street: "Adresse :"

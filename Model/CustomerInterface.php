@@ -21,55 +21,6 @@ use FOS\UserBundle\Model\UserInterface;
 interface CustomerInterface extends UserInterface
 {    
     /**
-     * Returns the title.
-     *
-     * @return string 
-     */
-    public function getTitle(); 
-            
-    /**
-     * Sets the title.
-     *
-     * @param string $title
-     */
-    public function setTitle($title);    
-    
-    /**
-     * Returns the first name.
-     *
-     * @return string 
-     */
-    public function getFirstName(); 
-            
-    /**
-     * Sets the first name.
-     *
-     * @param string $firstName
-     */
-    public function setFirstName($firstName);
-    
-    /**
-     * Returns the last name.
-     *
-     * @return string 
-     */
-    public function getLastName();  
-    
-    /**
-     * Sets the last name.
-     *
-     * @param string $lastName
-     */
-    public function setLastName($lastName);
-    
-    /**
-     * Returns the full name.
-     * 
-     * @return string
-     */       
-    public function getFullName();    
-    
-    /**
      * Returns the creation time.
      *
      * @return \Datetime

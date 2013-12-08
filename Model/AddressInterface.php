@@ -40,6 +40,20 @@ interface AddressInterface
     public function setCustomer(CustomerInterface $customer = null);    
     
     /**
+     * Returns the title.
+     *
+     * @return string 
+     */
+    public function getTitle(); 
+            
+    /**
+     * Sets the title.
+     *
+     * @param string $title
+     */
+    public function setTitle($title); 
+    
+    /**
      * Returns the first name.
      *
      * @return string 

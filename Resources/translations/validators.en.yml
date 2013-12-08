@@ -1,35 +1,40 @@
 ir_customer:  
-    first_name:
-        not_blank: Please enter your first name
-        min_length: The first name must be at least {{ limit }} characters long
-        max_length: The first name cannot be longer than {{ limit }} characters  
+    customer:
+        email:
+            not_blank: Please enter an e-mail address
+            invalid: The e-mail address is not valid
+            already_used: This e-mail address is already associated to an account
 
-    last_name:
-        not_blank: Please enter your last name
-        min_length: The last name must be at least {{ limit }} characters long
-        max_length: The last name cannot be longer than {{ limit }} characters   
-  
-    email:
-        not_blank: Please enter an e-mail address
-        invalid: The e-mail address is not valid
-        already_used: This e-mail address is already associated to an account
-        
-    password:
-        not_blank: Please enter a password
-        min_length: The password must be at least {{ limit }} characters long
+        password:
+            not_blank: Please enter a password
+            min_length: The password must be at least {{ limit }} characters long
 
-    street: 
-        not_blank: Please enter a street
-        min_length: The street must be at least {{ limit }} characters long
-        max_length: The street cannot be longer than {{ limit }} characters
+    address:
+        title:
+            not_blank: Please enter a title
+            
+        first_name:
+            not_blank: Please enter a first name
+            min_length: The first name must be at least {{ limit }} characters long
+            max_length: The first name cannot be longer than {{ limit }} characters  
 
-    postal_code: 
-        not_blank: Please enter a postal code            
+        last_name:
+            not_blank: Please enter a last name
+            min_length: The last name must be at least {{ limit }} characters long
+            max_length: The last name cannot be longer than {{ limit }} characters  
 
-    city: 
-        not_blank: Please enter a city
-        min_length: The city must be at least {{ limit }} characters long
-        max_length: The city cannot be longer than {{ limit }} characters
+        street: 
+            not_blank: Please enter a street
+            min_length: The street must be at least {{ limit }} characters long
+            max_length: The street cannot be longer than {{ limit }} characters
 
-    country:
-        not_blank: Please select a country           
+        postal_code: 
+            not_blank: Please enter a postal code            
+
+        city: 
+            not_blank: Please enter a city
+            min_length: The city must be at least {{ limit }} characters long
+            max_length: The city cannot be longer than {{ limit }} characters
+
+        country:
+            not_blank: Please select a country           

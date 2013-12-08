@@ -1,9 +1,5 @@
 # Customer
 customer:
-    title: Title
-    first_name: First name
-    last_name: Last name
-    full_name: Full name
     email: Email 
     last_login: Last login time
     enabled: Enabled
@@ -62,12 +58,10 @@ mr: Mr
 # Form field labels
 form:
     customer:
-        title: "Title:"
-        first_name: "First name:"
-        last_name: "Last name:"    
         password: "Password:"
         enabled: "Enabled:"
     address:
+        title: "Title:"
         first_name: "First name:"
         last_name: "Last name:"       
         street: "Street:"

@@ -58,9 +58,6 @@ class CustomerControllerTest extends WebTestCase
     {        
         $this->client->request('POST', '/customers/new', array(
             'ir_customer_form' => array (
-                'title' => Titles::MRS,
-                'firstName' => 'Foo',
-                'lastName' => 'Bar',   
                 'email' => 'test@example.com',
                 'plainPassword' => '123456',
                 '_token' => $this->generateCsrfToken(static::FORM_INTENTION),
@@ -87,9 +84,6 @@ class CustomerControllerTest extends WebTestCase
     {        
         $this->client->request('POST', '/customers/1/edit', array(
             'ir_customer_form' => array (
-                'title' => Titles::MRS,
-                'firstName' => 'Foo',
-                'lastName' => 'Bar',   
                 'email' => 'test@example.com',
                 '_token' => $this->generateCsrfToken(static::FORM_INTENTION),
             )

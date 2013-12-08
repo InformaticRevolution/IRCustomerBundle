@@ -26,23 +26,9 @@ class AccountType extends ProfileFormType
      */     
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('title', 'ir_customer_title', array(
-                'label' => 'form.customer.title', 
-                'translation_domain' => 'ir_customer',                
-            ))        
-            ->add('firstName', null, array(                 
-                'label' => 'form.customer.first_name',
-                'translation_domain' => 'ir_customer',
-            )) 
-            ->add('lastName', null, array(                 
-                'label' => 'form.customer.last_name',
-                'translation_domain' => 'ir_customer',
-            ))           
-        ;      
-        
         parent::buildForm($builder, $options);
-        $builder->remove('username');        
+     
+        $builder->remove('username');       
     }
 
     /**

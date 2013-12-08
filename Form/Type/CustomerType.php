@@ -27,21 +27,6 @@ class CustomerType extends ProfileFormType
      */     
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('title', 'ir_customer_title', array(
-                'label' => 'form.customer.title', 
-                'translation_domain' => 'ir_customer',                
-            ))        
-            ->add('firstName', null, array(                 
-                'label' => 'form.customer.first_name',
-                'translation_domain' => 'ir_customer',
-            )) 
-            ->add('lastName', null, array(                 
-                'label' => 'form.customer.last_name',
-                'translation_domain' => 'ir_customer',
-            ))           
-        ;      
-        
         $this->buildUserForm($builder, $options);
         
         $builder
@@ -53,7 +38,7 @@ class CustomerType extends ProfileFormType
             ->add('enabled', 'checkbox', array(
                 'label' => 'form.customer.enabled',
                 'translation_domain' => 'ir_customer',
-            ))                
+            ))             
             ->remove('username')
             ->addEventSubscriber(new BuildCustomerFormListener());
         ;        
