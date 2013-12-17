@@ -52,108 +52,84 @@
         <property name="title">
             <constraint name="NotNull">
                 <option name="message">ir_customer.address.title.not_null</option> 
-                <option name="groups">
-                    <value>Address</value>
-                </option>                          
+                <option name="groups">Address</option>                         
             </constraint>           
         </property>
 
         <property name="firstName">
             <constraint name="NotBlank">
                 <option name="message">ir_customer.address.first_name.not_blank</option> 
-                <option name="groups">
-                    <value>Address</value>
-                </option>                          
+                <option name="groups">Address</option>                       
             </constraint>
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="max">255</option>
                 <option name="minMessage">ir_customer.address.first_name.min_length</option>
                 <option name="maxMessage">ir_customer.address.first_name.max_length</option> 
-                <option name="groups">
-                    <value>Address</value>
-                </option>                        
+                <option name="groups">Address</option>                     
             </constraint>
         </property>  
         
         <property name="lastName">
             <constraint name="NotBlank">
                 <option name="message">ir_customer.address.last_name.not_blank</option> 
-                <option name="groups">
-                    <value>Address</value>
-                </option>                             
+                <option name="groups">Address</option>                            
             </constraint>
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="max">255</option>
                 <option name="minMessage">ir_customer.address.last_name.min_length</option>
                 <option name="maxMessage">ir_customer.address.last_name.max_length</option>
-                <option name="groups">
-                    <value>Address</value>
-                </option>                                  
+                <option name="groups">Address</option>                               
             </constraint>
         </property>
         
         <property name="street">
             <constraint name="NotBlank">
                 <option name="message">ir_customer.address.street.not_blank</option>
-                <option name="groups">
-                    <value>Address</value>
-                </option>                   
+                <option name="groups">Address</option>                 
             </constraint>
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="max">255</option>
                 <option name="minMessage">ir_customer.address.street.min_length</option>
                 <option name="maxMessage">ir_customer.address.street.max_length</option>
-                <option name="groups">
-                    <value>Address</value>
-                </option>                                  
+                <option name="groups">Address</option>                              
             </constraint>            
         </property>   
         
         <property name="postalCode">
             <constraint name="NotBlank">
                 <option name="message">ir_customer.address.postal_code.not_blank</option>
-                <option name="groups">
-                    <value>Address</value>
-                </option>                   
+                <option name="groups">Address</option>               
             </constraint>             
         </property>
                 
         <property name="city">
             <constraint name="NotBlank">
                 <option name="message">ir_customer.address.city.not_blank</option>
-                <option name="groups">
-                    <value>Address</value>
-                </option>                   
+                <option name="groups">Address</option>              
             </constraint>
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="max">255</option>
                 <option name="minMessage">ir_customer.address.city.min_length</option>
                 <option name="maxMessage">ir_customer.address.city.max_length</option>
-                <option name="groups">
-                    <value>Address</value>
-                </option>                                  
+                <option name="groups">Address</option>                                  
             </constraint>              
         </property> 
         
         <property name="country">
             <constraint name="NotBlank">
                 <option name="message">ir_customer.address.country.not_blank</option>
-                <option name="groups">
-                    <value>Address</value>
-                </option>                   
+                <option name="groups">Address</option>                
             </constraint>
         </property>  
         
         <property name="phone">
             <constraint name="NotBlank">
                 <option name="message">ir_customer.address.phone.not_blank</option>
-                <option name="groups">
-                    <value>Address</value>
-                </option>                   
+                <option name="groups">Address</option>                  
             </constraint>           
         </property>         
     </class>
