@@ -29,6 +29,9 @@
 	"doctrine/orm": "*",
         "nelmio/alice": "*"
     },  
+    "suggest": {
+        "sonata-project/intl-bundle": "Provides helper to the php-intl extension"
+    },            
     "config": {
         "bin-dir": "bin"
     },
