@@ -6,8 +6,8 @@
 
 <form action="{{ path('ir_customer_address_edit', {'id': id}) }}" {{ form_enctype(form) }} method="POST" novalidate>
     {% include 'IRCustomerBundle:Address:form.html.twig' %}
-    <div>
+    <div class="form-group">
         <button type="submit" class="btn btn-primary">{{ 'address.edit.save'|trans }}</button>
-        <a href="{{ app.request.headers.get('referer') }}" class="btn">{{ 'address.edit.cancel'|trans }}</a>          
+        <a href="{{ path('ir_customer_address_list') }}" class="btn">{{ 'address.edit.cancel'|trans }}</a>          
     </div>         
 </form>
