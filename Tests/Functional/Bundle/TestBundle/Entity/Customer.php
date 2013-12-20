@@ -32,5 +32,11 @@ class Customer extends BaseCustomer
     /**
      * @ORM\OneToMany(targetEntity="Address", mappedBy="customer", cascade={"all"}, orphanRemoval=true)
      */
-    protected $addresses;     
+    protected $addresses;  
+    
+    /**
+     * @ORM\OneToOne(targetEntity="Address", cascade={"all"})
+     * @ORM\JoinColumn(name="billing_address_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $billingAddress;
 }

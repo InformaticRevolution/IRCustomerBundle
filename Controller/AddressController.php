@@ -34,8 +34,8 @@ class AddressController extends ContainerAware
      */    
     public function listAction()
     {
-        $customer = $this->getCustomer();       
-
+        $customer = $this->getCustomer();
+        
         return $this->container->get('templating')->renderResponse('IRCustomerBundle:Address:list.html.'.$this->getEngine(), array(
             'addresses' => $customer->getAddresses(),
         ));
@@ -111,6 +111,10 @@ class AddressController extends ContainerAware
         if (!$customer->hasAddress($address)) {
             throw new AccessDeniedException(sprintf('The address with id %s does not belong to the customer', $id));
         }        
+
+        if ($address === $customer->getBillingAddress()) {
+            throw new AccessDeniedException('The billing address cannot be deleted');
+        }
 
         $this->container->get('ir_customer.manager.address')->deleteAddress($address);
 

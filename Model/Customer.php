@@ -81,10 +81,15 @@ abstract class Customer extends User implements CustomerInterface, AddressableIn
      */  
     public function setBillingAddress(AddressInterface $billingAddress = null)
     {
-        if (null !== $billingAddress && !$this->hasAddress($billingAddress)) {
-            $this->addAddress($billingAddress);
+        if ($billingAddress === $this->billingAddress) {
+            return;
         }
         
+        if (null !== $this->billingAddress) {
+            $this->removeAddress($this->billingAddress);
+        }
+
+        $this->addAddress($billingAddress);
         $this->billingAddress = $billingAddress;
     }
     
@@ -112,8 +117,12 @@ abstract class Customer extends User implements CustomerInterface, AddressableIn
      * {@inheritdoc}
      */           
     public function getAddresses()
-    {
-        return $this->addresses;
+    {        
+        $billingAddress = $this->billingAddress;
+        
+        return $this->addresses->filter(function (AddressInterface $address) use ($billingAddress){
+            return $billingAddress !== $address;
+        });            
     }    
     
     /**

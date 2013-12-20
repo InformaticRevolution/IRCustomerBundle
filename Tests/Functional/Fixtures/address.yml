@@ -3,7 +3,8 @@ IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Customer:
         email: test@example.com
         plainPassword: 123456
         enabled: true
-        addresses: ['@address1', '@address2', '@address3']
+        addresses: ['@address1', '@address2']
+        billingAddress: '@address3'
         
     customer2:
         email: <email()>

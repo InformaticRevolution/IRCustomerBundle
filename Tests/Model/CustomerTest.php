@@ -40,12 +40,19 @@ class CustomerTest extends \PHPUnit_Framework_TestCase
         $billingAddress = $this->getAddress();
         
         $this->assertNull($customer->getBillingAddress());
+        $this->assertNull($billingAddress->getCustomer());
         $this->assertNotContains($billingAddress, $customer->getAddresses());
         
         $customer->setBillingAddress($billingAddress);
         
         $this->assertSame($billingAddress, $customer->getBillingAddress());
-        $this->assertContains($billingAddress, $customer->getAddresses());
+        $this->assertSame($customer, $billingAddress->getCustomer());
+        $this->assertTrue($customer->hasAddress($billingAddress));
+        
+        $customer->setBillingAddress($this->getAddress());
+        
+        $this->assertFalse($customer->hasAddress($billingAddress));
+        $this->assertNull($billingAddress->getCustomer()); 
     }
     
     public function testShippingAddress()

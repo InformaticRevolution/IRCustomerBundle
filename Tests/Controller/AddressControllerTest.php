@@ -34,13 +34,13 @@ class AddressControllerTest extends WebTestCase
         $this->importDatabaseSchema();
         $this->loadFixtures('address');
     }
-        
+
     public function testListAction()
     {   
         $crawler = $this->client->request('GET', '/addresses/');
         
         $this->assertResponseStatusCode(200);
-        $this->assertCount(3, $crawler->filter('li'));
+        $this->assertCount(2, $crawler->filter('li'));
     }
     
     public function testNewActionGetMethod()
@@ -50,7 +50,7 @@ class AddressControllerTest extends WebTestCase
         $this->assertResponseStatusCode(200);
         $this->assertCount(1, $crawler->filter('form'));
     } 
-    
+
     public function testNewActionPostMethod()
     {        
         $this->client->request('POST', '/addresses/new', array(
@@ -73,9 +73,9 @@ class AddressControllerTest extends WebTestCase
         
         $this->assertResponseStatusCode(200);
         $this->assertCurrentUri('/addresses/');
-        $this->assertCount(4, $crawler->filter('li'));
+        $this->assertCount(3, $crawler->filter('li'));
     } 
-     
+
     public function testEditActionGetMethod()
     {   
         $crawler = $this->client->request('GET', '/addresses/1/edit');
@@ -118,7 +118,7 @@ class AddressControllerTest extends WebTestCase
         $crawler = $this->client->followRedirect();
         
         $this->assertCurrentUri('/addresses/');
-        $this->assertCount(2, $crawler->filter('li'));
+        $this->assertCount(1, $crawler->filter('li'));
     }    
     
     public function testAuthenticationIsRequired()
@@ -136,7 +136,7 @@ class AddressControllerTest extends WebTestCase
         
         $this->client->request('GET', '/addresses/1/delete');
         $this->assertResponseStatusCode(401);        
-    }      
+    }
     
     public function testAccessDeniedWhenCustomerNotOwnAddress()
     {
@@ -145,8 +145,8 @@ class AddressControllerTest extends WebTestCase
         
         $this->client->request('GET', '/addresses/4/delete');
         $this->assertResponseStatusCode(403);        
-    }    
-    
+    }  
+
     public function testNotFoundHttpWhenAddressNotExist()
     {
         $this->client->request('GET', '/addresses/foo/edit');
@@ -155,4 +155,10 @@ class AddressControllerTest extends WebTestCase
         $this->client->request('GET', '/addresses/foo/delete');
         $this->assertResponseStatusCode(404);        
     }  
+
+    public function testAccessDeniedWhenDeletingBillingAddress()
+    {
+        $this->client->request('GET', '/addresses/3/delete');
+        $this->assertResponseStatusCode(403);        
+    }    
 }
