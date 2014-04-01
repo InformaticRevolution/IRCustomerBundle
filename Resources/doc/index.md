@@ -228,7 +228,7 @@ Add the following configuration to your `routing.yml` file:
 
 ``` yaml
 # app/config/routing.yml
-ir_customer_admin:
+ir_customer_admin_customer:
     resource: "@IRCustomerBundle/Resources/config/routing/admin/customer.xml"
     prefix: /admin/customers
 ```

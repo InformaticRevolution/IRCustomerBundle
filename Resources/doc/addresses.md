@@ -56,8 +56,8 @@ class Customer extends BaseCustomer
     /**
      * @ORM\ManyToMany(targetEntity="Address", cascade={"all"}, orphanRemoval=true)
      * @ORM\JoinTable(name="customers_addresses",
-     *      joinColumns={@ORM\JoinColumn(name="customer_id", referencedColumnName="id", nullable=false)},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="address_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")}
+     *      joinColumns={@ORM\JoinColumn(name="customer_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="address_id", referencedColumnName="id", unique=true, onDelete="CASCADE")}
      *  )
      */
     protected $addresses;
@@ -120,12 +120,14 @@ Acme\CustomerBundle\Entity\Customer:
             joinColumn:
                 name: billing_address_id
                 referencedColumnName: id
+                onDelete: SET NULL
 
         shippingAddress:
             targetEntity: Address
             joinColumn:
                 name: shipping_address_id
                 referencedColumnName: id
+                onDelete: SET NULL
 
     manyToMany:
         addresses:
@@ -137,11 +139,12 @@ Acme\CustomerBundle\Entity\Customer:
                 joinColumns:
                     customer_id:
                         referencedColumnName: id
-                        nullable: false
+                        onDelete: CASCADE
                 inverseJoinColumns:
                     address_id:
                         referencedColumnName: id 
-                        nullable: false
+                        unique: true
+                        onDelete: CASCADE
 ```
 
 In XML:
@@ -173,10 +176,10 @@ In XML:
             </cascade>
             <join-table name="customers_addresses">
                 <join-columns>
-                    <join-column name="customer_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
+                    <join-column name="customer_id" referenced-column-name="id" on-delete="CASCADE" />
                 </join-columns>
                 <inverse-join-columns>
-                    <join-column name="address_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
+                    <join-column name="address_id" referenced-column-name="id" unique="true" on-delete="CASCADE" />
                 </inverse-join-columns>
             </join-table>
         </many-to-many>

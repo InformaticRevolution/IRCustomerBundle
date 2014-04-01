@@ -44,8 +44,8 @@ class Customer extends BaseCustomer
     /**
      * @ORM\ManyToMany(targetEntity="Address", cascade={"all"}, orphanRemoval=true)
      * @ORM\JoinTable(name="customers_addresses",
-     *      joinColumns={@ORM\JoinColumn(name="customer_id", referencedColumnName="id", nullable=false)},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="address_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")}
+     *      joinColumns={@ORM\JoinColumn(name="customer_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="address_id", referencedColumnName="id", unique=true, onDelete="CASCADE")}
      *  )
      */    
     protected $addresses;     
