@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace IR\Bundle\CustomerBundle\Controller;
+namespace IR\Bundle\CustomerBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -34,7 +34,7 @@ class CustomerController extends ContainerAware
     {
         $customers = $this->container->get('fos_user.user_manager')->findUsers();
         
-        return $this->container->get('templating')->renderResponse('IRCustomerBundle:Customer:list.html.'.$this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('IRCustomerBundle:Admin/Customer:list.html.'.$this->getEngine(), array(
             'customers' => $customers,
         ));        
     }
@@ -46,7 +46,7 @@ class CustomerController extends ContainerAware
     {
         $customer = $this->findCustomerById($id);
 
-        return $this->container->get('templating')->renderResponse('IRCustomerBundle:Customer:show.html.'.$this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('IRCustomerBundle:Admin/Customer:show.html.'.$this->getEngine(), array(
             'customer' => $customer
         ));
     }    
@@ -69,10 +69,10 @@ class CustomerController extends ContainerAware
             $dispatcher = $this->container->get('event_dispatcher');                      
             $dispatcher->dispatch(IRCustomerEvents::CUSTOMER_CREATE_COMPLETED, new CustomerEvent($customer));              
             
-            return new RedirectResponse($this->container->get('router')->generate('ir_customer_show', array('id' => $customer->getId())));             
+            return new RedirectResponse($this->container->get('router')->generate('ir_customer_admin_customer_show', array('id' => $customer->getId())));             
         }
         
-        return $this->container->get('templating')->renderResponse('IRCustomerBundle:Customer:new.html.'.$this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('IRCustomerBundle:Admin/Customer:new.html.'.$this->getEngine(), array(
             'form' => $form->createView(),
         ));         
     }  
@@ -95,10 +95,10 @@ class CustomerController extends ContainerAware
             $dispatcher = $this->container->get('event_dispatcher');               
             $dispatcher->dispatch(IRCustomerEvents::CUSTOMER_EDIT_COMPLETED, new CustomerEvent($customer));            
             
-            return new RedirectResponse($this->container->get('router')->generate('ir_customer_show', array('id' => $customer->getId()))); 
+            return new RedirectResponse($this->container->get('router')->generate('ir_customer_admin_customer_show', array('id' => $customer->getId()))); 
         }
         
-        return $this->container->get('templating')->renderResponse('IRCustomerBundle:Customer:edit.html.'.$this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('IRCustomerBundle:Admin/Customer:edit.html.'.$this->getEngine(), array(
             'id' => $id,
             'form' => $form->createView(),
         ));         
@@ -116,7 +116,7 @@ class CustomerController extends ContainerAware
         $dispatcher = $this->container->get('event_dispatcher');               
         $dispatcher->dispatch(IRCustomerEvents::CUSTOMER_DELETE_COMPLETED, new CustomerEvent($customer));          
         
-        return new RedirectResponse($this->container->get('router')->generate('ir_customer_list')); 
+        return new RedirectResponse($this->container->get('router')->generate('ir_customer_admin_customer_list')); 
     }    
     
     /**

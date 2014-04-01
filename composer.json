@@ -12,11 +12,12 @@
     ],
     "require": {
         "php": ">=5.3.2",
-        "symfony/framework-bundle": "~2.0",
-        "friendsofsymfony/user-bundle": "~2.0@dev",
+        "symfony/framework-bundle": "~2.1",
+        "friendsofsymfony/user-bundle": "~2.0",
         "stof/doctrine-extensions-bundle": "1.1.*"
     },
     "require-dev": {
+        "informaticrevolution/address-bundle": "*",
         "symfony/class-loader": "*",
         "symfony/twig-bundle": "*",
         "symfony/finder": "*",
@@ -25,11 +26,13 @@
         "symfony/form": "*",
         "symfony/validator": "*",
         "symfony/yaml": "*",
-        "doctrine/doctrine-bundle": "*@dev",
+        "symfony/expression-language": "*",
+        "doctrine/doctrine-bundle": "*",
 	"doctrine/orm": "*",
         "nelmio/alice": "*"
     },  
     "suggest": {
+        "informaticrevolution/address-bundle": "Adds cusomer's address book support",
         "sonata-project/intl-bundle": "Provides helper to the php-intl extension"
     },            
     "config": {
@@ -39,6 +42,7 @@
         "psr-0": { "IR\\Bundle\\CustomerBundle": "" }
     },
     "target-dir": "IR/Bundle/CustomerBundle",
+    "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
             "dev-master": "1.0.x-dev"

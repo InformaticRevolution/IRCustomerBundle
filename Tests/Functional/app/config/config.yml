@@ -27,9 +27,7 @@ doctrine:
         
     orm:
         auto_generate_proxy_classes: %kernel.debug%
-        auto_mapping: true 
-        resolve_target_entities:
-            IR\Bundle\CustomerBundle\Model\CustomerInterface: IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Customer        
+        auto_mapping: true       
         
 # FOSUser Configuration
 fos_user:
@@ -45,8 +43,12 @@ stof_doctrine_extensions:
         default:
             timestampable: true
 
+# IRAddress Configuration
+ir_address:
+    db_driver: orm
+    address_class: IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Address
+
 # IRCustomer Configuration
 ir_customer:
     db_driver: orm
-    address:
-        address_class: IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Address
+    address: ~

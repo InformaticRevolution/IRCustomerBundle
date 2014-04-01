@@ -46,8 +46,7 @@ class Configuration implements ConfigurationInterface
                     ->isRequired()
                     ->cannotBeEmpty()
                 ->end()
-            ->end()
-        ;         
+            ->end();  
         
         $this->addCustomerSection($rootNode);
         $this->addAddressSection($rootNode);
@@ -76,9 +75,8 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
-            ->end()
-        ;
-    }     
+            ->end();
+    }  
     
     private function addAddressSection(ArrayNodeDefinition $node)
     {
@@ -87,8 +85,6 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('address')
                     ->canBeUnset()
                     ->children()
-                        ->scalarNode('address_class')->isRequired()->cannotBeEmpty()->end()
-                        ->scalarNode('address_manager')->defaultValue('ir_customer.manager.address.default')->end()
                         ->arrayNode('form')
                             ->addDefaultsIfNotSet()
                             ->children()
@@ -102,7 +98,6 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
-            ->end()
-        ;
-    }      
+            ->end();
+    }     
 }

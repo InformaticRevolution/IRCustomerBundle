@@ -1,21 +1,21 @@
 {% trans_default_domain 'ir_customer' %}
 
 <div class="page-header">
-    <h1>{{ 'customer.show.title'|trans }}</h1>
+    <h1>{{ 'admin.customer.show.title'|trans }}</h1>
 </div>  
 
 <div class="well well-sm">
-    <a href="{{ path('ir_customer_edit', {'id': customer.id}) }}" class="btn btn-primary">
-        <i class="glyphicon glyphicon-edit"></i> {{ 'customer.action.edit'|trans }}
+    <a href="{{ path('ir_customer_admin_customer_edit', {'id': customer.id}) }}" class="btn btn-primary">
+        <i class="glyphicon glyphicon-edit"></i> {{ 'admin.customer.action.edit'|trans }}
     </a>
-    <a href="{{ path('ir_customer_delete', {'id': customer.id}) }}" class="btn btn-danger">
-        <i class="glyphicon glyphicon-trash"></i> {{ 'customer.action.delete'|trans }}
+    <a href="{{ path('ir_customer_admin_customer_delete', {'id': customer.id}) }}" class="btn btn-danger">
+        <i class="glyphicon glyphicon-trash"></i> {{ 'admin.customer.action.delete'|trans }}
     </a>
 </div>
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        {{ 'customer.show.general_info'|trans }}
+        {{ 'admin.customer.show.general_info'|trans }}
     </div>
 
     <table class="table table-bordered">
@@ -25,21 +25,21 @@
         </colgroup>           
         <tbody>
             <tr>
-                <td>{{ 'customer.email'|trans }}</td>
+                <td>{{ 'admin.customer.email'|trans }}</td>
                 <td>{{ customer.email }}</td>
             </tr>    
             <tr>
-                <td>{{ 'customer.enabled'|trans }}</td>
+                <td>{{ 'admin.customer.enabled'|trans }}</td>
                 <td>
                     <i class="glyphicon glyphicon-{{ customer.enabled ? 'ok' : 'remove' }}"></i>  
                 </td>
             </tr>                
             <tr>
-                <td>{{ 'customer.last_login'|trans }}</td>
+                <td>{{ 'admin.customer.last_login'|trans }}</td>
                 <td>{{ customer.lastLogin|date }}</td>
             </tr> 
             <tr>
-                <td>{{ 'customer.created_at'|trans }}</td>
+                <td>{{ 'admin.customer.created_at'|trans }}</td>
                 <td>{{ customer.createdAt|date }}</td>
             </tr>         
         </tbody>

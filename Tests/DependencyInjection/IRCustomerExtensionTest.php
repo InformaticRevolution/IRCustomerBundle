@@ -48,18 +48,19 @@ class IRCustomerExtensionTest extends \PHPUnit_Framework_TestCase
         $config = $this->getEmptyConfig();
         $config['db_driver'] = 'foo';
         $loader->load(array($config), new ContainerBuilder());
-    }    
-
+    }   
+    
     /**
-     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+     * @expectedException \InvalidArgumentException
      */
-    public function testCustomerLoadThrowsExceptionUnlessAddressModelClassSet()
+    public function testCustomerLoadThrowsExceptionUnlessIRAddressBundleIsRegistered()
     {
+        $this->configuration = new ContainerBuilder();
+        $this->configuration->setParameter('kernel.bundles', array());
         $loader = new IRCustomerExtension();
         $config = $this->getFullConfig();
-        unset($config['address']['address_class']);
-        $loader->load(array($config), new ContainerBuilder());
-    }    
+        $loader->load(array($config), $this->configuration);
+    }       
 
     public function testDisableCustomer()
     {
@@ -70,20 +71,12 @@ class IRCustomerExtensionTest extends \PHPUnit_Framework_TestCase
         $loader->load(array($config), $this->configuration);
         $this->assertNotHasDefinition('ir_customer.form.customer');
     }    
-    
-    public function testCustomerLoadModelClass()
-    {
-        $this->createFullConfiguration();
 
-        $this->assertParameter('Acme\CustomerBundle\Entity\Address', 'ir_customer.model.address.class');
-    }         
-    
     public function testCustomerLoadManagerClassWithDefaults()
     {
         $this->createEmptyConfiguration();
 
         $this->assertParameter('orm', 'ir_customer.db_driver');
-        $this->assertNotHasDefinition('ir_customer.manager.address');
     }    
     
     public function testCustomerLoadManagerClass()
@@ -91,7 +84,6 @@ class IRCustomerExtensionTest extends \PHPUnit_Framework_TestCase
         $this->createFullConfiguration();
 
         $this->assertParameter('orm', 'ir_customer.db_driver');
-        $this->assertAlias('ir_customer.manager.address.default', 'ir_customer.manager.address');
     }       
     
     public function testCustomerLoadFormClassWithDefaults()
@@ -153,7 +145,11 @@ class IRCustomerExtensionTest extends \PHPUnit_Framework_TestCase
     
     protected function createFullConfiguration()
     {
+        // Simulates the registration of the IRAddressBundle in the AppKernel
+        $bundles = array('IRAddressBundle' => 'IR\Bundle\AddressBundle\IRAddressBundle');
+        
         $this->configuration = new ContainerBuilder();
+        $this->configuration->setParameter('kernel.bundles', $bundles);
         $loader = new IRCustomerExtension();
         $config = $this->getFullConfig();
         $loader->load(array($config), $this->configuration);
@@ -178,15 +174,6 @@ class IRCustomerExtensionTest extends \PHPUnit_Framework_TestCase
         $parser = new Parser();
 
         return $parser->parse(file_get_contents(__DIR__.'/Fixtures/full_config.yml'));
-    }    
-
-    /**
-     * @param string $value
-     * @param string $key
-     */
-    private function assertAlias($value, $key)
-    {
-        $this->assertEquals($value, (string) $this->configuration->getAlias($key), sprintf('%s alias is correct', $key));
     }    
 
     /**

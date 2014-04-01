@@ -13,8 +13,6 @@ namespace IR\Bundle\CustomerBundle\Tests\Functional;
 
 use Nelmio\Alice\Fixtures;
 
-use IR\Bundle\CustomerBundle\Model\Titles;
-
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -83,19 +81,7 @@ class WebTestCase extends BaseWebTestCase
     {
         return $this->client->getContainer()->get('form.csrf_provider')->generateCsrfToken($intention);
     }      
-    
-    /**
-     * Provides title fake data.
-     * 
-     * @return string
-     */
-    public function title()
-    {
-        $titles = Titles::getTitles();
-        
-        return $titles[array_rand($titles)];
-    }    
-    
+
     /**
      * Asserts the response status code.
      * 

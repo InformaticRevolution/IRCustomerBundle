@@ -28,15 +28,25 @@ class Customer extends BaseCustomer
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-    
+
     /**
-     * @ORM\OneToMany(targetEntity="Address", mappedBy="customer", cascade={"all"}, orphanRemoval=true)
-     */
-    protected $addresses;  
-    
-    /**
-     * @ORM\OneToOne(targetEntity="Address", cascade={"all"})
+     * @ORM\OneToOne(targetEntity="Address")
      * @ORM\JoinColumn(name="billing_address_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $billingAddress;
+    
+    /**
+     * @ORM\OneToOne(targetEntity="Address")
+     * @ORM\JoinColumn(name="shipping_address_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $shippingAddress;  
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="Address", cascade={"all"}, orphanRemoval=true)
+     * @ORM\JoinTable(name="customers_addresses",
+     *      joinColumns={@ORM\JoinColumn(name="customer_id", referencedColumnName="id", nullable=false)},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="address_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")}
+     *  )
+     */    
+    protected $addresses;     
 }

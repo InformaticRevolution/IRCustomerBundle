@@ -14,6 +14,7 @@ namespace IR\Bundle\CustomerBundle\Model;
 use FOS\UserBundle\Model\User;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use IR\Bundle\AddressBundle\Model\AddressInterface;
 
 /**
  * Abstract Customer implementation.
@@ -131,7 +132,6 @@ abstract class Customer extends User implements CustomerInterface, AddressableIn
     public function addAddress(AddressInterface $address)
     {
         if (!$this->hasAddress($address)) {
-            $address->setCustomer($this);
             $this->addresses->add($address);
         }
     }    
@@ -141,9 +141,7 @@ abstract class Customer extends User implements CustomerInterface, AddressableIn
      */       
     public function removeAddress(AddressInterface $address)
     {
-        if ($this->addresses->removeElement($address)) {
-            $address->setCustomer(null);
-        }
+        $this->addresses->removeElement($address);
     }    
     
     /**

@@ -12,7 +12,7 @@
 namespace IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use IR\Bundle\CustomerBundle\Model\Address as BaseAddress;
+use IR\Bundle\AddressBundle\Model\Address as BaseAddress;
 
 /**
  * @ORM\Entity

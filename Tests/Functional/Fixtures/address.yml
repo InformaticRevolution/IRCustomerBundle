@@ -13,11 +13,13 @@ IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Customer:
         
 IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Address (local):        
     address{1..4}:
-        title: <title()>
         firstName: <firstName()> 
         lastName: <lastName()>
+        companyName: <company()>
         street: <streetAddress()>
+        division: <state()>
         postalCode: <postcode()>
         city: <city()>
         country: <countryCode()>
-        phone: <phoneNumber()>
+        homePhone: <phoneNumber()>
+        mobilePhone: <phoneNumber()>

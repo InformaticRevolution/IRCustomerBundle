@@ -12,6 +12,7 @@
 namespace IR\Bundle\CustomerBundle\Model;
 
 use Doctrine\Common\Collections\Collection;
+use IR\Bundle\AddressBundle\Model\AddressInterface;
 
 /**
  * Addressable Interface.

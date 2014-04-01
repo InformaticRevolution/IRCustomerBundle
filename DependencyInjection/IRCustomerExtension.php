@@ -67,7 +67,7 @@ class IRCustomerExtension extends Extension implements PrependExtensionInterface
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         
-        foreach (array('account', 'listeners', 'registration', 'title') as $basename) {
+        foreach (array('account', 'listeners', 'registration') as $basename) {
             $loader->load(sprintf('%s.xml', $basename));
         }          
         
@@ -75,11 +75,11 @@ class IRCustomerExtension extends Extension implements PrependExtensionInterface
         
         if (!empty($config['customer'])) {
             $this->loadCustomer($config['customer'], $container, $loader);
-        }        
+        }     
         
         if (!empty($config['address'])) {
             $this->loadAddress($config['address'], $container, $loader, $config['db_driver']);
-        }         
+        }        
     }   
     
     private function loadCustomer(array $config, ContainerBuilder $container, XmlFileLoader $loader)
@@ -89,18 +89,20 @@ class IRCustomerExtension extends Extension implements PrependExtensionInterface
         $container->setParameter('ir_customer.form.name.customer', $config['form']['name']);
         $container->setParameter('ir_customer.form.type.customer', $config['form']['type']); 
         $container->setParameter('ir_customer.form.validation_groups.customer', $config['form']['validation_groups']);
-    }      
-
+    }  
+    
     private function loadAddress(array $config, ContainerBuilder $container, XmlFileLoader $loader, $dbDriver)
     {
-        $loader->load('address.xml');
-        $loader->load(sprintf('driver/%s/address.xml', $dbDriver));
+        $bundles = $container->getParameter('kernel.bundles');
+        
+        if (!isset($bundles['IRAddressBundle'])) {
+            throw new \InvalidArgumentException('The IRAddressBundle must be registered in the AppKernel when activating the "address" configuration node.');
+        }       
 
-        $container->setParameter('ir_customer.model.address.class', $config['address_class']);
+        $loader->load('address.xml');
+        
         $container->setParameter('ir_customer.form.name.address', $config['form']['name']);
         $container->setParameter('ir_customer.form.type.address', $config['form']['type']);
-        $container->setParameter('ir_customer.form.validation_groups.address', $config['form']['validation_groups']);
-        
-        $container->setAlias('ir_customer.manager.address', $config['address_manager']);
+        $container->setParameter('ir_customer.form.validation_groups.address', $config['form']['validation_groups']);        
     }     
 }

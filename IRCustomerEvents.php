@@ -23,21 +23,21 @@ final class IRCustomerEvents
      *
      * The event listener method receives a IR\Bundle\CustomerBundle\Event\CustomerEvent instance.
      */
-    const CUSTOMER_CREATE_COMPLETED = 'ir_customer.customer.create.completed';    
+    const CUSTOMER_CREATE_COMPLETED = 'ir_customer.admin.customer.create.completed';    
 
     /**
      * The CUSTOMER_EDIT_COMPLETED event occurs after saving the customer in the customer edit process.
      *
      * The event listener method receives a IR\Bundle\CustomerBundle\Event\CustomerEvent instance.
      */
-    const CUSTOMER_EDIT_COMPLETED = 'ir_customer.customer.edit.completed';    
+    const CUSTOMER_EDIT_COMPLETED = 'ir_customer.admin.customer.edit.completed';    
     
     /**
      * The CUSTOMER_DELETE_COMPLETED event occurs after deleting the customer.
      *
      * The event listener method receives a IR\Bundle\CustomerBundle\Event\CustomerEvent instance.
      */
-    const CUSTOMER_DELETE_COMPLETED = 'ir_customer.customer.delete.completed';     
+    const CUSTOMER_DELETE_COMPLETED = 'ir_customer.admin.customer.delete.completed';     
     
     /**
      * The ADDRESS_CREATE_COMPLETED event occurs after saving the address in the address creation process.

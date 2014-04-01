@@ -5,8 +5,7 @@ customer:
         name: acme_customer_form 
         validation_groups: [acme_customer]
 address:
-    address_class: Acme\CustomerBundle\Entity\Address
     form:
         type: acme_customer_address
         name: acme_customer_address_form 
-        validation_groups: [acme_address]    
+        validation_groups: [acme_address]        

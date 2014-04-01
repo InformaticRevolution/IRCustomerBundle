@@ -40,19 +40,16 @@ class CustomerTest extends \PHPUnit_Framework_TestCase
         $billingAddress = $this->getAddress();
         
         $this->assertNull($customer->getBillingAddress());
-        $this->assertNull($billingAddress->getCustomer());
         $this->assertNotContains($billingAddress, $customer->getAddresses());
         
         $customer->setBillingAddress($billingAddress);
         
         $this->assertSame($billingAddress, $customer->getBillingAddress());
-        $this->assertSame($customer, $billingAddress->getCustomer());
         $this->assertTrue($customer->hasAddress($billingAddress));
         
         $customer->setBillingAddress($this->getAddress());
         
         $this->assertFalse($customer->hasAddress($billingAddress));
-        $this->assertNull($billingAddress->getCustomer()); 
     }
     
     public function testShippingAddress()
@@ -74,13 +71,9 @@ class CustomerTest extends \PHPUnit_Framework_TestCase
         $customer = $this->getCustomer();
         $address = $this->getAddress();
         
-        $this->assertNotContains($address, $customer->getAddresses());
-        $this->assertNull($address->getCustomer());
-        
+        $this->assertNotContains($address, $customer->getAddresses());        
         $customer->addAddress($address);
-        
         $this->assertContains($address, $customer->getAddresses());
-        $this->assertSame($customer, $address->getCustomer());        
     }   
     
     public function testRemoveAddress()
@@ -90,12 +83,8 @@ class CustomerTest extends \PHPUnit_Framework_TestCase
         $customer->addAddress($address);
         
         $this->assertContains($address, $customer->getAddresses());
-        $this->assertSame($customer, $address->getCustomer());
-        
         $customer->removeAddress($address);
-        
         $this->assertNotContains($address, $customer->getAddresses());
-        $this->assertNull($address->getCustomer());
     } 
     
     public function testHasAddress()
@@ -143,7 +132,7 @@ class CustomerTest extends \PHPUnit_Framework_TestCase
      * @return Address
      */
     protected function getAddress()
-    {
-        return $this->getMockForAbstractClass('IR\Bundle\CustomerBundle\Model\Address');
+    {       
+        return $this->getMockForAbstractClass('IR\Bundle\AddressBundle\Model\Address');
     }       
 }

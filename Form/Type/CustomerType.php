@@ -41,7 +41,6 @@ class CustomerType extends ProfileFormType
             ))             
             ->remove('username')
             ->addEventSubscriber(new BuildCustomerFormListener());
-        ;        
     }
 
     /**

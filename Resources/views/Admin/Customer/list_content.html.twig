@@ -1,22 +1,22 @@
 {% trans_default_domain 'ir_customer' %}
 
 <div class="page-header">
-    <h1>{{ 'customer.list.title'|trans }}</h1>
+    <h1>{{ 'admin.customer.list.title'|trans }}</h1>
 </div>    
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        <a href="{{ path('ir_customer_new') }}" class="btn btn-primary">
-            <i class="glyphicon glyphicon-plus"></i> {{ 'customer.action.new'|trans }}
+        <a href="{{ path('ir_customer_admin_customer_new') }}" class="btn btn-primary">
+            <i class="glyphicon glyphicon-plus"></i> {{ 'admin.customer.action.new'|trans }}
         </a>    
     </div>
   
     {% if customers|length %}
-    <table class="table table-striped">
+    <table class="table">
         <thead>
             <tr>
-                <th>{{ 'customer.email'|trans }}</th> 
-                <th>{{ 'customer.enabled'|trans }}</th> 
+                <th>{{ 'admin.customer.email'|trans }}</th> 
+                <th>{{ 'admin.customer.enabled'|trans }}</th> 
                 <th></th>             
             </tr>
         </thead>
@@ -30,13 +30,13 @@
                 </td>
                 <td>
                     <div class="pull-right">
-                        <a href="{{ path('ir_customer_show', {'id': customer.id}) }}" class="btn btn-default">
+                        <a href="{{ path('ir_customer_admin_customer_show', {'id': customer.id}) }}" class="btn btn-default">
                             <i class="glyphicon glyphicon-list"></i>
                         </a>                     
-                        <a href="{{ path('ir_customer_edit', {'id': customer.id}) }}" class="btn btn-primary">
+                        <a href="{{ path('ir_customer_admin_customer_edit', {'id': customer.id}) }}" class="btn btn-primary">
                             <i class="glyphicon glyphicon-edit"></i>
                         </a>   
-                        <a href="{{ path('ir_customer_delete', {'id': customer.id}) }}" class="btn btn-danger">
+                        <a href="{{ path('ir_customer_admin_customer_delete', {'id': customer.id}) }}" class="btn btn-danger">
                             <i class="glyphicon glyphicon-trash"></i>
                         </a>                            
                     </div>               
@@ -47,13 +47,13 @@
     </table>
     {% else %}
     <div class="panel-body">
-        {{ 'customer.list.no_results'|trans }}
+        {{ 'admin.customer.list.no_results'|trans }}
     </div>
     {% endif %}
         
     <div class="panel-footer">
-        <a href="{{ path('ir_customer_new') }}" class="btn btn-primary">
-            <i class="glyphicon glyphicon-plus"></i> {{ 'customer.action.new'|trans }}
+        <a href="{{ path('ir_customer_admin_customer_new') }}" class="btn btn-primary">
+            <i class="glyphicon glyphicon-plus"></i> {{ 'admin.customer.action.new'|trans }}
         </a>    
     </div>  
 </div>

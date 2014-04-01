@@ -1,33 +1,3 @@
-# Customer
-customer:
-    email: Adresse e-mail  
-    last_login: Dernière connexion
-    enabled: Activé
-    created_at: Date d'inscription
-        
-    list:
-        title: Clients
-        no_results: Aucun client pour le moment.
-    show:
-        title: Client
-        general_info: Informations générales
-    new:
-        title: Ajouter un client
-        save: Ajouter
-        cancel: Annuler
-    edit:
-        title: Modifier le client
-        save: Enregistrer
-        cancel: Annuler    
-    action:
-        new: Ajouter un client
-        edit: Modifier
-        delete: Supprimer
-    flash:
-        created: Le client a été ajouté
-        updated: Le client a été mis à jour
-        deleted: Le client a été supprimé
-
 # Address
 address:
     list:
@@ -50,25 +20,40 @@ address:
         updated: L'adresse a été mise à jour
         deleted: L'adresse a été supprimée
 
-# Title
-mrs: Madame
-miss: Mademoiselle
-mr: Monsieur
+# Admin
+admin:
+    # Customer
+    customer:
+        email: Adresse e-mail  
+        last_login: Dernière connexion
+        enabled: Activé
+        created_at: Date d'inscription
+
+        list:
+            title: Clients
+            no_results: Aucun client pour le moment.
+        show:
+            title: Client
+            general_info: Informations générales
+        new:
+            title: Ajouter un client
+            save: Ajouter
+            cancel: Annuler
+        edit:
+            title: Modifier le client
+            save: Enregistrer
+            cancel: Annuler    
+        action:
+            new: Ajouter un client
+            edit: Modifier
+            delete: Supprimer
+        flash:
+            created: Le client a été ajouté
+            updated: Le client a été mis à jour
+            deleted: Le client a été supprimé
 
 # Form field labels
 form:
     customer:        
         password: "Mot de passe :"
         enabled: "Activé :"
-    address:
-        title: "Civilité :"
-        first_name: "Prénom :"
-        last_name: "Nom :"        
-        street: "Adresse :"
-        postal_code: "Code postal :"
-        city: "Ville :"
-        country: "Pays :"
-        phone: "Numéro de téléphone :"
-        
-        
-               

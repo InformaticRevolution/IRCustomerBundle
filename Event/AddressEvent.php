@@ -12,7 +12,7 @@
 namespace IR\Bundle\CustomerBundle\Event;
 
 use Symfony\Component\EventDispatcher\Event;
-use IR\Bundle\CustomerBundle\Model\AddressInterface;
+use IR\Bundle\AddressBundle\Model\AddressInterface;
 
 /**
  * Address Event.

@@ -11,7 +11,6 @@
 
 namespace IR\Bundle\CustomerBundle\Tests\Controller;
 
-use IR\Bundle\CustomerBundle\Model\Titles;
 use IR\Bundle\CustomerBundle\Tests\Functional\WebTestCase;
 
 /**
@@ -33,7 +32,7 @@ class CustomerControllerTest extends WebTestCase
     
     public function testListAction()
     {   
-        $crawler = $this->client->request('GET', '/customers/');
+        $crawler = $this->client->request('GET', '/admin/customers/');
         
         $this->assertResponseStatusCode(200);
         $this->assertCount(3, $crawler->filter('tbody tr'));
@@ -41,14 +40,14 @@ class CustomerControllerTest extends WebTestCase
 
     public function testShowAction()
     {
-        $this->client->request('GET', '/customers/1');
+        $this->client->request('GET', '/admin/customers/1');
         
         $this->assertResponseStatusCode(200);
     }    
     
     public function testNewActionGetMethod()
     {
-        $crawler = $this->client->request('GET', '/customers/new');
+        $crawler = $this->client->request('GET', '/admin/customers/new');
         
         $this->assertResponseStatusCode(200);
         $this->assertCount(1, $crawler->filter('form'));
@@ -56,7 +55,7 @@ class CustomerControllerTest extends WebTestCase
     
     public function testNewActionPostMethod()
     {        
-        $this->client->request('POST', '/customers/new', array(
+        $this->client->request('POST', '/admin/customers/new', array(
             'ir_customer_form' => array (
                 'email' => 'test@example.com',
                 'plainPassword' => '123456',
@@ -69,12 +68,12 @@ class CustomerControllerTest extends WebTestCase
         $this->client->followRedirect();
         
         $this->assertResponseStatusCode(200);
-        $this->assertCurrentUri('/customers/4');
+        $this->assertCurrentUri('/admin/customers/4');
     }     
     
     public function testEditActionGetMethod()
     {   
-        $crawler = $this->client->request('GET', '/customers/1/edit');
+        $crawler = $this->client->request('GET', '/admin/customers/1/edit');
         
         $this->assertResponseStatusCode(200);
         $this->assertCount(1, $crawler->filter('form'));        
@@ -82,7 +81,7 @@ class CustomerControllerTest extends WebTestCase
     
     public function testEditActionPostMethod()
     {        
-        $this->client->request('POST', '/customers/1/edit', array(
+        $this->client->request('POST', '/admin/customers/1/edit', array(
             'ir_customer_form' => array (
                 'email' => 'test@example.com',
                 '_token' => $this->generateCsrfToken(static::FORM_INTENTION),
@@ -94,31 +93,31 @@ class CustomerControllerTest extends WebTestCase
         $crawler = $this->client->followRedirect();
         
         $this->assertResponseStatusCode(200);
-        $this->assertCurrentUri('/customers/1');
+        $this->assertCurrentUri('/admin/customers/1');
         $this->assertRegExp('~test@example.com~', $crawler->filter('tbody')->text());
     }     
     
     public function testDeleteAction()
     {
-        $this->client->request('GET', '/customers/1/delete');
+        $this->client->request('GET', '/admin/customers/1/delete');
         
         $this->assertResponseStatusCode(302);
         
         $crawler = $this->client->followRedirect();
         
-        $this->assertCurrentUri('/customers/');
+        $this->assertCurrentUri('/admin/customers/');
         $this->assertCount(2, $crawler->filter('tbody tr'));
     }      
     
     public function testNotFoundHttpWhenCustomerNotExist()
     {
-        $this->client->request('GET', '/customers/foo');
+        $this->client->request('GET', '/admin/customers/foo');
         $this->assertResponseStatusCode(404);
         
-        $this->client->request('GET', '/customers/foo/edit');
+        $this->client->request('GET', '/admin/customers/foo/edit');
         $this->assertResponseStatusCode(404);
         
-        $this->client->request('GET', '/customers/foo/delete');
+        $this->client->request('GET', '/admin/customers/foo/delete');
         $this->assertResponseStatusCode(404);        
     }   
 }

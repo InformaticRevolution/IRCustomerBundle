@@ -14,7 +14,7 @@
     {% for address in addresses %}
         <li>
             <address>
-                <strong>{{ address.fullName }}</strong><br />
+                <strong>{{ address.firstName }} {{ address.lastName }}</strong><br />
                 {{ address.street }},<br />
                 {{ address.postalCode }} {{ address.city }}<br />
                 {{ address.country }}

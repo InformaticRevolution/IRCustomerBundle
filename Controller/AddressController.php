@@ -17,10 +17,10 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
+use IR\Bundle\AddressBundle\Model\AddressInterface;
 use IR\Bundle\CustomerBundle\IRCustomerEvents;
 use IR\Bundle\CustomerBundle\Event\AddressEvent;
 use IR\Bundle\CustomerBundle\Model\CustomerInterface;
-use IR\Bundle\CustomerBundle\Model\AddressInterface;
 
 /**
  * Controller managing customer's address book.
@@ -47,14 +47,15 @@ class AddressController extends ContainerAware
     public function newAction(Request $request)
     {   
         $customer = $this->getCustomer();
-        $address = $this->container->get('ir_customer.manager.address')->createAddress($customer);
+        $address = $this->container->get('ir_address.manager.address')->createAddress($customer);
         
         $form = $this->container->get('ir_customer.form.address');
         $form->setData($address);
         $form->handleRequest($request); 
-                
+
         if ($form->isValid()) {
-            $this->container->get('ir_customer.manager.address')->updateAddress($address);
+            $customer->addAddress($address);
+            $this->container->get('fos_user.user_manager')->updateUser($customer);
 
             /* @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
             $dispatcher = $this->container->get('event_dispatcher');                      
@@ -85,7 +86,7 @@ class AddressController extends ContainerAware
         $form->handleRequest($request); 
 
         if ($form->isValid()) {
-            $this->container->get('ir_customer.manager.address')->updateAddress($address);
+            $this->container->get('fos_user.user_manager')->updateUser($customer);
             
             /* @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
             $dispatcher = $this->container->get('event_dispatcher');               
@@ -107,7 +108,7 @@ class AddressController extends ContainerAware
     {
         $customer = $this->getCustomer(); 
         $address = $this->findAddressById($id);
-        
+
         if (!$customer->hasAddress($address)) {
             throw new AccessDeniedException(sprintf('The address with id %s does not belong to the customer', $id));
         }        
@@ -116,7 +117,8 @@ class AddressController extends ContainerAware
             throw new AccessDeniedException('The billing address cannot be deleted');
         }
 
-        $this->container->get('ir_customer.manager.address')->deleteAddress($address);
+        $customer->removeAddress($address);
+        $this->container->get('fos_user.user_manager')->updateUser($customer);
 
         /* @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $this->container->get('event_dispatcher');          
@@ -154,7 +156,7 @@ class AddressController extends ContainerAware
      */
     protected function findAddressById($id)
     {
-        $address = $this->container->get('ir_customer.manager.address')->findAddressBy(array('id' => $id));
+        $address = $this->container->get('ir_address.manager.address')->findAddressBy(array('id' => $id));
 
         if (null === $address) {
             throw new NotFoundHttpException(sprintf('The address with id %s does not exist', $id));

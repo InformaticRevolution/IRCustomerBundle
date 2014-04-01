@@ -11,7 +11,6 @@
 
 namespace IR\Bundle\CustomerBundle\Tests\Controller;
 
-use IR\Bundle\CustomerBundle\Model\Titles;
 use IR\Bundle\CustomerBundle\Tests\Functional\WebTestCase;
 
 /**
@@ -34,35 +33,37 @@ class AddressControllerTest extends WebTestCase
         $this->importDatabaseSchema();
         $this->loadFixtures('address');
     }
-
+    
     public function testListAction()
     {   
-        $crawler = $this->client->request('GET', '/addresses/');
+        $crawler = $this->client->request('GET', '/account/addresses/');
         
         $this->assertResponseStatusCode(200);
         $this->assertCount(2, $crawler->filter('li'));
     }
-    
+
     public function testNewActionGetMethod()
     {
-        $crawler = $this->client->request('GET', '/addresses/new');
+        $crawler = $this->client->request('GET', '/account/addresses/new');
         
         $this->assertResponseStatusCode(200);
         $this->assertCount(1, $crawler->filter('form'));
-    } 
+    }
 
     public function testNewActionPostMethod()
     {        
-        $this->client->request('POST', '/addresses/new', array(
+        $this->client->request('POST', '/account/addresses/new', array(
             'ir_customer_address_form' => array (
-                'title' => Titles::MRS,
                 'firstName' => 'Jackson',
                 'lastName' => 'Parker',
+                'companyName' => 'Bogan-Treutel',
                 'street' => '439 Karley Loaf Suite',
+                'division' => 'Illinois',
                 'postalCode' => '63110',
                 'city' => 'Chicago',
                 'country' => 'US',
-                'phone' => '132-149-0269',
+                'homePhone' => '632-245-1363',
+                'mobilePhone' => '132-149-0269',
                 '_token' => $this->generateCsrfToken(static::FORM_INTENTION),
             ) 
         ));  
@@ -72,13 +73,13 @@ class AddressControllerTest extends WebTestCase
         $crawler = $this->client->followRedirect();
         
         $this->assertResponseStatusCode(200);
-        $this->assertCurrentUri('/addresses/');
+        $this->assertCurrentUri('/account/addresses/');
         $this->assertCount(3, $crawler->filter('li'));
     } 
 
     public function testEditActionGetMethod()
     {   
-        $crawler = $this->client->request('GET', '/addresses/1/edit');
+        $crawler = $this->client->request('GET', '/account/addresses/1/edit');
         
         $this->assertResponseStatusCode(200);
         $this->assertCount(1, $crawler->filter('form'));        
@@ -86,16 +87,18 @@ class AddressControllerTest extends WebTestCase
     
     public function testEditActionPostMethod()
     {        
-        $this->client->request('POST', '/addresses/1/edit', array(
+        $this->client->request('POST', '/account/addresses/1/edit', array(
             'ir_customer_address_form' => array (
-                'title' => Titles::MRS,
                 'firstName' => 'Foo',
                 'lastName' => 'Bar',
+                'companyName' => 'Bogan-Treutel',
                 'street' => '439 Karley Loaf Suite',
+                'division' => 'Illinois',
                 'postalCode' => '63110',
                 'city' => 'Chicago',
-                'country' => 'US',   
-                'phone' => '132-149-0269',
+                'country' => 'US',
+                'homePhone' => '632-245-1363',
+                'mobilePhone' => '132-149-0269',
                 '_token' => $this->generateCsrfToken(static::FORM_INTENTION),
             )
         ));     
@@ -105,60 +108,60 @@ class AddressControllerTest extends WebTestCase
         $crawler = $this->client->followRedirect();
         
         $this->assertResponseStatusCode(200);
-        $this->assertCurrentUri('/addresses/');
+        $this->assertCurrentUri('/account/addresses/');
         $this->assertRegExp('~Foo Bar~', $crawler->filter('li')->text());
     }     
-               
+  
     public function testDeleteAction()
     {
-        $this->client->request('GET', '/addresses/1/delete');
+        $this->client->request('GET', '/account/addresses/1/delete');
         
         $this->assertResponseStatusCode(302);
         
         $crawler = $this->client->followRedirect();
         
-        $this->assertCurrentUri('/addresses/');
+        $this->assertCurrentUri('/account/addresses/');
         $this->assertCount(1, $crawler->filter('li'));
     }    
-    
+
     public function testAuthenticationIsRequired()
     {
         $this->client = static::createClient();
         
-        $this->client->request('GET', '/addresses/');
+        $this->client->request('GET', '/account/addresses/');
         $this->assertResponseStatusCode(401);
 
-        $this->client->request('GET', '/addresses/new');
+        $this->client->request('GET', '/account/addresses/new');
         $this->assertResponseStatusCode(401); 
         
-        $this->client->request('GET', '/addresses/1/edit');
+        $this->client->request('GET', '/account/addresses/1/edit');
         $this->assertResponseStatusCode(401);        
         
-        $this->client->request('GET', '/addresses/1/delete');
+        $this->client->request('GET', '/account/addresses/1/delete');
         $this->assertResponseStatusCode(401);        
     }
-    
+
     public function testAccessDeniedWhenCustomerNotOwnAddress()
     {
-        $this->client->request('GET', '/addresses/4/edit');
+        $this->client->request('GET', '/account/addresses/4/edit');
         $this->assertResponseStatusCode(403);
         
-        $this->client->request('GET', '/addresses/4/delete');
+        $this->client->request('GET', '/account/addresses/4/delete');
         $this->assertResponseStatusCode(403);        
     }  
 
     public function testNotFoundHttpWhenAddressNotExist()
     {
-        $this->client->request('GET', '/addresses/foo/edit');
+        $this->client->request('GET', '/account/addresses/foo/edit');
         $this->assertResponseStatusCode(404);
         
-        $this->client->request('GET', '/addresses/foo/delete');
+        $this->client->request('GET', '/account/addresses/foo/delete');
         $this->assertResponseStatusCode(404);        
     }  
 
     public function testAccessDeniedWhenDeletingBillingAddress()
     {
-        $this->client->request('GET', '/addresses/3/delete');
+        $this->client->request('GET', '/account/addresses/3/delete');
         $this->assertResponseStatusCode(403);        
-    }    
+    }
 }

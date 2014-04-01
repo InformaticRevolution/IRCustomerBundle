@@ -3,90 +3,17 @@ Using Addresses With IRCustomerBundle
 
 ## Installation
 
-1. Create your Address class
+1. Install the IRAddressBundle
 2. Define the Customer-Address relation
 3. Configure the addresses
 4. Import the routing file
 5. Update your database schema
 
-### Step 1: Create your Address class
+### Step 1: Install the IRAddressBundle
 
-##### Annotations
-``` php
-<?php
-// src/Acme/CustomerBundle/Entity/Address.php
+The installation instructions are located in the IRAddressBundle documentation.
 
-namespace Acme\CustomerBundle\Entity;
-
-use Doctrine\ORM\Mapping as ORM;
-use IR\Bundle\CustomerBundle\Model\Address as BaseAddress;
-
-/**
- * @ORM\Entity
- * @ORM\Table(name="acme_customer_address")
- */
-class Address extends BaseAddress
-{
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-     protected $id;
-}
-```
-
-##### Yaml or Xml
-
-``` php
-<?php
-// src/Acme/CustomerBundle/Entity/Address.php
-
-namespace Acme\CustomerBundle\Entity;
-
-use IR\Bundle\CustomerBundle\Model\Address as BaseAddress;
-
-/**
- * Address.
- */
-class Address extends BaseAddress
-{
-}
-```
-
-In YAML:
-
-``` yaml
-# src/Acme/CustomerBundle/Resources/config/doctrine/Address.orm.yml
-Acme\CustomerBundle\Entity\Address:
-    type:  entity
-    table: acme_customer_address
-
-    id:
-        id:
-            type: integer
-            generator:
-                strategy: AUTO
-```
-
-In XML:
-
-``` xml
-<!-- src/Acme/CustomerBundle/Resources/config/doctrine/Address.orm.xml -->
-<?xml version="1.0" encoding="UTF-8"?>
-<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
-                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-
-    <entity name="Acme\CustomerBundle\Entity\Address" table="acme_customer_address">
-        <id name="id" type="integer" column="id">
-            <generator strategy="AUTO" />
-        </id> 
-    </entity>
-    
-</doctrine-mapping>
-```
+[Read the Documentation](https://github.com/InformaticRevolution/IRAddressBundle/blob/master/Resources/doc/index.md)
 
 ### Step 2: Define the Customer-Address relation
 
@@ -115,7 +42,23 @@ class Customer extends BaseCustomer
     protected $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Address", mappedBy="customer", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToOne(targetEntity="Address")
+     * @ORM\JoinColumn(name="billing_address_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $billingAddress;
+    
+    /**
+     * @ORM\OneToOne(targetEntity="Address")
+     * @ORM\JoinColumn(name="shipping_address_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $shippingAddress;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Address", cascade={"all"}, orphanRemoval=true)
+     * @ORM\JoinTable(name="customers_addresses",
+     *      joinColumns={@ORM\JoinColumn(name="customer_id", referencedColumnName="id", nullable=false)},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="address_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")}
+     *  )
      */
     protected $addresses;
 
@@ -171,12 +114,34 @@ Acme\CustomerBundle\Entity\Customer:
             generator:
                 strategy: AUTO
 
-    oneToMany:
+    oneToOne:
+        billingAddress:
+            targetEntity: Address
+            joinColumn:
+                name: billing_address_id
+                referencedColumnName: id
+
+        shippingAddress:
+            targetEntity: Address
+            joinColumn:
+                name: shipping_address_id
+                referencedColumnName: id
+
+    manyToMany:
         addresses:
             targetEntity: Address
-            mappedBy: customer
             cascade: [ all ]
-            orphanRemoval: true 
+            orphanRemoval: true
+            joinTable:
+                name: customers_addresses
+                joinColumns:
+                    customer_id:
+                        referencedColumnName: id
+                        nullable: false
+                inverseJoinColumns:
+                    address_id:
+                        referencedColumnName: id 
+                        nullable: false
 ```
 
 In XML:
@@ -184,21 +149,37 @@ In XML:
 ``` xml
 <!-- src/Acme/CustomerBundle/Resources/config/doctrine/Customer.orm.xml -->
 <?xml version="1.0" encoding="UTF-8"?>
+
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
-                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <entity name="Acme\CustomerBundle\Model\Customer" table="acme_customer">
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO" />
         </id>
 
-        <one-to-many field="addresses" target-entity="Address" mapped-by="customer" orphan-removal="true">
+        <one-to-one field="billingAddress" target-entity="Address">
+            <join-column name="billing_address_id" referenced-column-name="id" on-delete="SET NULL" />           
+        </one-to-one>  
+
+        <one-to-one field="shippingAddress" target-entity="Address">
+            <join-column name="shipping_address_id" referenced-column-name="id" on-delete="SET NULL" />           
+        </one-to-one>   
+
+        <many-to-many field="addresses" target-entity="Address" orphan-removal="true">
             <cascade>
-                <cascade-all />
-            </cascade>            
-        </one-to-many>
+                <cascade-all/>
+            </cascade>
+            <join-table name="customers_addresses">
+                <join-columns>
+                    <join-column name="customer_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="address_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
     </entity>
     
 </doctrine-mapping>
@@ -208,26 +189,11 @@ In XML:
 
 Add the following configuration to your `config.yml` file:
 
-**a) Add the address configuration**
-
 ``` yaml
 # app/config/config.yml
 ir_customer:
     db_driver: orm # orm is the only available driver for the moment 
-    address:
-        address_class: Acme\CustomerBundle\Entity\Address
-```
-
-**b) Add the CustomerInterface path to the RTEL**
-
-``` yaml
-# app/config/config.yml
-doctrine:
-    # ....
-    orm:
-        # ....
-        resolve_target_entities:
-            IR\Bundle\CustomerBundle\Model\CustomerInterface: Acme\CustomerBundle\Entity\Customer
+    address: ~
 ```
 
 ### Step 4: Import the routing file

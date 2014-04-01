@@ -25,9 +25,9 @@ use IR\Bundle\CustomerBundle\IRCustomerEvents;
 class FlashListener implements EventSubscriberInterface
 {
     private static $successMessages = array(
-        IRCustomerEvents::CUSTOMER_CREATE_COMPLETED => 'customer.flash.created',
-        IRCustomerEvents::CUSTOMER_EDIT_COMPLETED => 'customer.flash.updated',
-        IRCustomerEvents::CUSTOMER_DELETE_COMPLETED => 'customer.flash.deleted',        
+        IRCustomerEvents::CUSTOMER_CREATE_COMPLETED => 'admin.customer.flash.created',
+        IRCustomerEvents::CUSTOMER_EDIT_COMPLETED => 'admin.customer.flash.updated',
+        IRCustomerEvents::CUSTOMER_DELETE_COMPLETED => 'admin.customer.flash.deleted',        
         IRCustomerEvents::ADDRESS_CREATE_COMPLETED => 'address.flash.created',
         IRCustomerEvents::ADDRESS_EDIT_COMPLETED => 'address.flash.updated',
         IRCustomerEvents::ADDRESS_DELETE_COMPLETED => 'address.flash.deleted',
