@@ -85,7 +85,7 @@ namespace Acme\CustomerBundle\Entity;
 use IR\Bundle\CustomerBundle\Model\Customer as BaseCustomer;
 
 /**
- * Customer.
+ * Customer implementation.
  */
 class Customer extends BaseCustomer
 {
