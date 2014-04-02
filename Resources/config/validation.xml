@@ -45,7 +45,15 @@
                     <value>Customer</value>
                 </option>
             </constraint>
-        </property>                                                                
+        </property>         
+        
+        <property name="billingAddress">
+            <constraint name="Valid" />
+        </property>
+        
+        <property name="shippingAddress">
+            <constraint name="Valid" />
+        </property>                                                                                                                                                                                                                                                    
     </class>
  
 </constraint-mapping>        
