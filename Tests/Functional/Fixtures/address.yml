@@ -8,8 +8,7 @@ IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Address (loca
         postalCode: <postcode()>
         city: <city()>
         country: <countryCode()>
-        homePhone: <phoneNumber()>
-        mobilePhone: <phoneNumber()>
+        phone: <phoneNumber()>
 
 IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Customer:
     customer1:

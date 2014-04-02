@@ -62,8 +62,7 @@ class AddressControllerTest extends WebTestCase
                 'postalCode' => '63110',
                 'city' => 'Chicago',
                 'country' => 'US',
-                'homePhone' => '632-245-1363',
-                'mobilePhone' => '132-149-0269',
+                'phone' => '632-245-1363',
                 '_token' => $this->generateCsrfToken(static::FORM_INTENTION),
             ) 
         ));  
@@ -97,8 +96,7 @@ class AddressControllerTest extends WebTestCase
                 'postalCode' => '63110',
                 'city' => 'Chicago',
                 'country' => 'US',
-                'homePhone' => '632-245-1363',
-                'mobilePhone' => '132-149-0269',
+                'phone' => '632-245-1363',
                 '_token' => $this->generateCsrfToken(static::FORM_INTENTION),
             )
         ));     
