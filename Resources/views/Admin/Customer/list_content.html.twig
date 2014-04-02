@@ -2,58 +2,49 @@
 
 <div class="page-header">
     <h1>{{ 'admin.customer.list.title'|trans }}</h1>
-</div>    
+</div> 
 
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <a href="{{ path('ir_customer_admin_customer_new') }}" class="btn btn-primary">
-            <i class="glyphicon glyphicon-plus"></i> {{ 'admin.customer.action.new'|trans }}
-        </a>    
-    </div>
-  
-    {% if customers|length %}
-    <table class="table">
-        <thead>
-            <tr>
-                <th>{{ 'admin.customer.email'|trans }}</th> 
-                <th>{{ 'admin.customer.enabled'|trans }}</th> 
-                <th></th>             
-            </tr>
-        </thead>
+<div class="well well-sm">
+    <a href="{{ path('ir_customer_admin_customer_new') }}" class="btn btn-primary">
+        <i class="glyphicon glyphicon-plus"></i> {{ 'admin.customer.action.new'|trans }}
+    </a>
+</div>  
 
-        <tbody>
-        {% for customer in customers %}
-            <tr>
-                <td>{{ customer.email }}</td>
-                <td>
-                    <i class="glyphicon glyphicon-{{ customer.enabled ? 'ok' : 'remove' }}"></i>         
-                </td>
-                <td>
-                    <div class="pull-right">
-                        <a href="{{ path('ir_customer_admin_customer_show', {'id': customer.id}) }}" class="btn btn-default">
-                            <i class="glyphicon glyphicon-list"></i>
-                        </a>                     
-                        <a href="{{ path('ir_customer_admin_customer_edit', {'id': customer.id}) }}" class="btn btn-primary">
-                            <i class="glyphicon glyphicon-edit"></i>
-                        </a>   
-                        <a href="{{ path('ir_customer_admin_customer_delete', {'id': customer.id}) }}" class="btn btn-danger">
-                            <i class="glyphicon glyphicon-trash"></i>
-                        </a>                            
-                    </div>               
-                </td>               
-            </tr>
-        {% endfor %}        
-        </tbody>
-    </table>
-    {% else %}
-    <div class="panel-body">
-        {{ 'admin.customer.list.no_results'|trans }}
-    </div>
-    {% endif %}
-        
-    <div class="panel-footer">
-        <a href="{{ path('ir_customer_admin_customer_new') }}" class="btn btn-primary">
-            <i class="glyphicon glyphicon-plus"></i> {{ 'admin.customer.action.new'|trans }}
-        </a>    
-    </div>  
+{% if customers|length %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>{{ 'admin.customer.email'|trans }}</th> 
+            <th>{{ 'admin.customer.enabled'|trans }}</th> 
+            <th></th>             
+        </tr>
+    </thead>
+    <tbody>
+    {% for customer in customers %}
+        <tr>
+            <td>{{ customer.email }}</td>
+            <td>
+                <i class="glyphicon glyphicon-{{ customer.enabled ? 'ok' : 'remove' }}"></i>         
+            </td>
+            <td>
+                <div class="pull-right">
+                    <a href="{{ path('ir_customer_admin_customer_show', {'id': customer.id}) }}" class="btn btn-default">
+                        <i class="glyphicon glyphicon-list"></i>
+                    </a>                     
+                    <a href="{{ path('ir_customer_admin_customer_edit', {'id': customer.id}) }}" class="btn btn-primary">
+                        <i class="glyphicon glyphicon-edit"></i>
+                    </a>   
+                    <a href="{{ path('ir_customer_admin_customer_delete', {'id': customer.id}) }}" class="btn btn-danger">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </a>                            
+                </div>               
+            </td>               
+        </tr>
+    {% endfor %}        
+    </tbody>
+</table>
+{% else %}
+<div class="well">
+    {{ 'admin.customer.list.no_results'|trans }}
 </div>
+{% endif %}
