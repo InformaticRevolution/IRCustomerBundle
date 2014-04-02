@@ -29,6 +29,9 @@ doctrine:
         auto_generate_proxy_classes: %kernel.debug%
         auto_mapping: true       
         
+        resolve_target_entities:
+            IR\Bundle\AddressBundle\Model\CountryInterface: IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Country 
+            
 # FOSUser Configuration
 fos_user:
     firewall_name: main
@@ -47,6 +50,7 @@ stof_doctrine_extensions:
 ir_address:
     db_driver: orm
     address_class: IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Address
+    country_class: IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Country
 
 # IRCustomer Configuration
 ir_customer:

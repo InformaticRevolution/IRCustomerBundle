@@ -11,8 +11,8 @@
 
 namespace IR\Bundle\CustomerBundle\Tests\Model;
 
-use IR\Bundle\CustomerBundle\Model\Customer;
-use IR\Bundle\CustomerBundle\Model\Address;
+use IR\Bundle\AddressBundle\Model\AddressInterface;
+use IR\Bundle\CustomerBundle\Model\CustomerInterface;
 
 /**
  * Customer Test.
@@ -121,7 +121,7 @@ class CustomerTest extends \PHPUnit_Framework_TestCase
     }     
     
     /**
-     * @return Customer
+     * @return CustomerInterface
      */
     protected function getCustomer()
     {
@@ -129,10 +129,10 @@ class CustomerTest extends \PHPUnit_Framework_TestCase
     }   
     
     /**
-     * @return Address
+     * @return AddressInterface
      */
     protected function getAddress()
     {       
-        return $this->getMockForAbstractClass('IR\Bundle\AddressBundle\Model\Address');
+        return $this->getMockForAbstractClass('IR\Bundle\AddressBundle\Model\AddressInterface');
     }       
 }

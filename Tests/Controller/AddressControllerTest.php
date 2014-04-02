@@ -61,7 +61,7 @@ class AddressControllerTest extends WebTestCase
                 'division' => 'Illinois',
                 'postalCode' => '63110',
                 'city' => 'Chicago',
-                'country' => 'US',
+                'country' => 1,
                 'phone' => '632-245-1363',
                 '_token' => $this->generateCsrfToken(static::FORM_INTENTION),
             ) 
@@ -95,7 +95,7 @@ class AddressControllerTest extends WebTestCase
                 'division' => 'Illinois',
                 'postalCode' => '63110',
                 'city' => 'Chicago',
-                'country' => 'US',
+                'country' => 1,
                 'phone' => '632-245-1363',
                 '_token' => $this->generateCsrfToken(static::FORM_INTENTION),
             )
