@@ -30,7 +30,9 @@ doctrine:
         auto_mapping: true       
         
         resolve_target_entities:
-            IR\Bundle\AddressBundle\Model\CountryInterface: IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Country 
+            IR\Bundle\ZoneBundle\Model\ZoneInterface: IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Zone
+            IR\Bundle\ZoneBundle\Model\CountryInterface: IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Country 
+            IR\Bundle\ZoneBundle\Model\ProvinceInterface: IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Province 
             
 # FOSUser Configuration
 fos_user:
@@ -46,11 +48,17 @@ stof_doctrine_extensions:
         default:
             timestampable: true
 
+# IRZone Configuration
+ir_zone:
+    db_driver: orm 
+    zone_class: IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Zone 
+    country_class: IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Country 
+    province_class: IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Province 
+
 # IRAddress Configuration
 ir_address:
     db_driver: orm
     address_class: IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Address
-    country_class: IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Country
 
 # IRCustomer Configuration
 ir_customer:

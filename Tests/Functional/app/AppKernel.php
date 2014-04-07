@@ -28,6 +28,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new IR\Bundle\ZoneBundle\IRZoneBundle(),
             new IR\Bundle\AddressBundle\IRAddressBundle(),
             new IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\TestBundle(),
             new IR\Bundle\CustomerBundle\IRCustomerBundle(),

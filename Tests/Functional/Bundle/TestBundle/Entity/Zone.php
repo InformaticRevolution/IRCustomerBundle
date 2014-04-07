@@ -12,15 +12,15 @@
 namespace IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use IR\Bundle\ZoneBundle\Model\Country as BaseCountry;
+use IR\Bundle\ZoneBundle\Model\Zone as BaseZone;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="country")
+ * @ORM\Table(name="zone")
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
-class Country extends BaseCountry
+class Zone extends BaseZone
 {
     /**
      * @ORM\Id
@@ -28,10 +28,4 @@ class Country extends BaseCountry
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id; 
-    
-    /**
-     * @ORM\OneToMany(targetEntity="Province", mappedBy="country", cascade={"all"}, orphanRemoval=true)
-     * @ORM\OrderBy({"name" = "ASC"})
-     */
-    protected $provinces;      
 }

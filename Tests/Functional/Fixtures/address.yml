@@ -1,7 +1,19 @@
-IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Country:        
+IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Zone:
+    zone:
+        name: <sentence(2)> 
+
+IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Country:
     country:
-        name: <country()> 
+        name: <country()>
         isoCode: <countryCode()>
+        zone: @zone        
+        provinces: ["@province1", "@province2", "@province3"]        
+
+IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Province (local):
+    province{1..3}:
+        name: <state()>
+        code: <stateAbbr()>
+        zone: @zone
 
 IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Address (local):        
     address{1..4}:
@@ -9,7 +21,7 @@ IR\Bundle\CustomerBundle\Tests\Functional\Bundle\TestBundle\Entity\Address (loca
         lastName: <lastName()>
         companyName: <company()>
         street: <streetAddress()>
-        division: <state()>
+        province: @province1
         postalCode: <postcode()>
         city: <city()>
         country: @country

@@ -20,6 +20,7 @@
         
         <service id="ir_customer.form.type.address" class="%ir_customer.form.type.address.class%">
             <argument>%ir_address.model.address.class%</argument>
+            <argument type="service" id="ir_address.form.listener.address" />
             <tag name="form.type" alias="ir_customer_address" />
         </service>     
     </services>
