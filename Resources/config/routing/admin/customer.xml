@@ -4,7 +4,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="ir_customer_admin_customer_list" pattern="/" methods="GET">
+    <route id="ir_customer_admin_customer_list" pattern="/">
         <default key="_controller">IRCustomerBundle:Admin/Customer:list</default>
     </route>
 
