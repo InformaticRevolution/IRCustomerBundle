@@ -34,7 +34,7 @@ class CustomerController extends ContainerAware
     {
         $customers = $this->container->get('fos_user.user_manager')->findUsers();
         
-        return $this->container->get('templating')->renderResponse('IRCustomerBundle:Admin/Customer:list.html.'.$this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('IRCustomerBundle:Admin/Customer:list.html.twig', array(
             'customers' => $customers,
         ));        
     }
@@ -46,7 +46,7 @@ class CustomerController extends ContainerAware
     {
         $customer = $this->findCustomerById($id);
 
-        return $this->container->get('templating')->renderResponse('IRCustomerBundle:Admin/Customer:show.html.'.$this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('IRCustomerBundle:Admin/Customer:show.html.twig', array(
             'customer' => $customer
         ));
     }    
@@ -72,7 +72,7 @@ class CustomerController extends ContainerAware
             return new RedirectResponse($this->container->get('router')->generate('ir_customer_admin_customer_show', array('id' => $customer->getId())));             
         }
         
-        return $this->container->get('templating')->renderResponse('IRCustomerBundle:Admin/Customer:new.html.'.$this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('IRCustomerBundle:Admin/Customer:new.html.twig', array(
             'form' => $form->createView(),
         ));         
     }  
@@ -98,7 +98,7 @@ class CustomerController extends ContainerAware
             return new RedirectResponse($this->container->get('router')->generate('ir_customer_admin_customer_show', array('id' => $customer->getId()))); 
         }
         
-        return $this->container->get('templating')->renderResponse('IRCustomerBundle:Admin/Customer:edit.html.'.$this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('IRCustomerBundle:Admin/Customer:edit.html.twig', array(
             'id' => $id,
             'form' => $form->createView(),
         ));         
@@ -137,15 +137,5 @@ class CustomerController extends ContainerAware
         }
 
         return $customer;
-    }      
-    
-    /**
-     * Returns the template engine.
-     * 
-     * @return string
-     */    
-   protected function getEngine()
-    {
-        return $this->container->getParameter('fos_user.template.engine');
-    }     
+    }
 }
