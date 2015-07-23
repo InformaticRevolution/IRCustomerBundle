@@ -24,20 +24,20 @@ use IR\Bundle\AddressBundle\Model\AddressInterface;
 abstract class Customer extends User implements CustomerInterface, AddressableInterface
 {
     /**
-     * @var AddressInterface 
-     */    
-    protected $billingAddress;
-    
-    /**
-     * @var AddressInterface 
+     * @var AddressInterface
      */
-    protected $shippingAddress;    
-    
+    protected $billingAddress;
+
+    /**
+     * @var AddressInterface
+     */
+    protected $shippingAddress;
+
     /**
      * @var Collection
      */
     protected $addresses;
-    
+
     /**
      * @var \Datetime
      */
@@ -46,32 +46,32 @@ abstract class Customer extends User implements CustomerInterface, AddressableIn
     /**
      * @var \Datetime
      */
-    protected $updatedAt;    
-        
-    
+    protected $updatedAt;
+
+
     /**
      * Constructor.
-     */            
+     */
     public function __construct()
     {
         parent::__construct();
-        
+
         $this->addresses = new ArrayCollection();
-    }      
+    }
 
     /**
      * {@inheritdoc}
-     */       
+     */
     public function setEmail($email)
     {
         parent::setEmail($email);
-        
+
         $this->setUsername($email);
-    }      
-    
+    }
+
     /**
      * {@inheritdoc}
-     */  
+     */
     public function getBillingAddress()
     {
         return $this->billingAddress;
@@ -79,13 +79,13 @@ abstract class Customer extends User implements CustomerInterface, AddressableIn
 
     /**
      * {@inheritdoc}
-     */  
+     */
     public function setBillingAddress(AddressInterface $billingAddress = null)
     {
         if ($billingAddress === $this->billingAddress) {
             return;
         }
-        
+
         if (null !== $this->billingAddress) {
             $this->removeAddress($this->billingAddress);
         }
@@ -93,10 +93,10 @@ abstract class Customer extends User implements CustomerInterface, AddressableIn
         $this->addAddress($billingAddress);
         $this->billingAddress = $billingAddress;
     }
-    
+
     /**
      * {@inheritdoc}
-     */  
+     */
     public function getShippingAddress()
     {
         return $this->shippingAddress;
@@ -104,83 +104,88 @@ abstract class Customer extends User implements CustomerInterface, AddressableIn
 
     /**
      * {@inheritdoc}
-     */  
+     */
     public function setShippingAddress(AddressInterface $shippingAddress = null)
     {
-        if (null !== $shippingAddress && !$this->hasAddress($shippingAddress)) {
-            $this->addAddress($shippingAddress);
+        if ($shippingAddress === $this->shippingAddress) {
+            return;
         }
-        
-        $this->shippingAddress = $shippingAddress;        
+
+        if (null !== $this->shippingAddress) {
+            $this->removeAddress($this->shippingAddress);
+        }
+
+        $this->addAddress($shippingAddress);
+        $this->shippingAddress = $shippingAddress;
     }
-    
+
     /**
      * {@inheritdoc}
-     */           
+     */
     public function getAddresses()
-    {        
+    {
         $billingAddress = $this->billingAddress;
-        
+
         return $this->addresses->filter(function (AddressInterface $address) use ($billingAddress){
             return $billingAddress !== $address;
-        });            
-    }    
-    
+        });
+    }
+
     /**
      * {@inheritdoc}
-     */     
+     */
     public function addAddress(AddressInterface $address)
     {
         if (!$this->hasAddress($address)) {
             $this->addresses->add($address);
         }
-    }    
-    
+    }
+
     /**
      * {@inheritdoc}
-     */       
+     */
     public function removeAddress(AddressInterface $address)
     {
         $this->addresses->removeElement($address);
-    }    
-    
+    }
+
     /**
      * {@inheritdoc}
-     */     
+     */
     public function hasAddress(AddressInterface $address)
     {
         return $this->addresses->contains($address);
-    }      
-    
+    }
+
     /**
      * {@inheritdoc}
-     */   
+     */
     public function getCreatedAt()
     {
         return $this->createdAt;
-    }    
+    }
 
     /**
      * {@inheritdoc}
-     */   
+     */
     public function setCreatedAt(\Datetime $createdAt)
     {
-        $this->createdAt = $createdAt;        
-    }      
-    
+        $this->createdAt = $createdAt;
+    }
+
     /**
      * {@inheritdoc}
-     */   
+     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
-    } 
+    }
 
     /**
      * {@inheritdoc}
-     */   
+     */
     public function setUpdatedAt(\Datetime $updatedAt = null)
     {
-        $this->updatedAt = $updatedAt;        
+        $this->updatedAt = $updatedAt;
     }
 }
